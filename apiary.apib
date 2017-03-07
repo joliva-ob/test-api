@@ -1,80 +1,175 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://products.apiblueprint.org/
 
 # test-api
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Products is a simple api to test the amazing features of apiblueprint format!
 
-## Questions Collection [/questions]
+## Products Collection [/products]
 
-### List All Questions [GET]
+### List All Products [GET]
 
 + Response 200 (application/json)
 
-        [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                [
                     {
-                        "choice": "Swift",
-                        "votes": 2048
+                        "id": 1,
+                        "name": "Product 1",
+                        "type": "EVENT"
                     }, {
-                        "choice": "Python",
-                        "votes": 1024
+                        "id": 2,
+                        "name": "Product 2",
+                        "type": "EVENT"
                     }, {
-                        "choice": "Objective-C",
-                        "votes": 512
+                        "id": 3,
+                        "name": "Product 3",
+                        "type": "ACTIVITY"
                     }, {
-                        "choice": "Ruby",
-                        "votes": 256
+                        "id": 4,
+                        "name": "Product 4",
+                        "type": "ACTIVITY"
                     }
                 ]
             }
-        ]
 
-### Create a New Question [POST]
++ Response 400 (application/json)
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+        {
+          "error": "Bad request",
+          "error_description": "There was a syntax error, check your params request and try it again."
+        }
+
++ Response 404 (application/json)
+
+        {
+          "error": "Not found",
+          "error_description": "The requested resource does not found."
+        }
+
+### Create a New Product [POST]
+
+You can create your own products by posting a new resource with all its details.
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "name": "Product 5",
+            "type": "EVENT"
         }
 
 + Response 201 (application/json)
 
     + Headers
 
-            Location: /questions/2
+            Location: /products/5
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
+                [
                     {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
+                        "id": 5,
+                        "name": "Product 5",
+                        "type": "ACTIVITY"
                     }
                 ]
             }
+
++ Response 400 (application/json)
+
+        {
+          "error": "Bad request",
+          "error_description": "There was a syntax error, check your params request and try it again."
+        }
+
++ Response 404 (application/json)
+
+        {
+          "error": "Not found",
+          "error_description": "The requested resource does not found."
+        }
+
+### Update a Product [PUT]
+
+You can modify a given product by putting a new resource details.
+
++ Request (application/json)
+
+        {
+            "id": 3
+            "name": "Product 3",
+            "type": "ACTIVITY"
+        }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /products/3
+
+    + Body
+
+            {
+                [
+                    {
+                        "id": 3,
+                        "name": "Product 3",
+                        "type": "ACTIVITY"
+                    }
+                ]
+            }
+
++ Response 400 (application/json)
+
+        {
+          "error": "Bad request",
+          "error_description": "There was a syntax error, check your params request and try it again."
+        }
+
++ Response 404 (application/json)
+
+        {
+          "error": "Not found",
+          "error_description": "The requested resource does not found."
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /products/3
+
+    + Body
+
+            {
+                [
+                    {
+                        "id": 3,
+                        "name": "Product 3",
+                        "type": "ACTIVITY"
+                    }
+                ]
+            }
+            
+### Delete a Product [DELETE]
+
+You can delete a given product identified by its id.
+
++ Response 200 (application/json)
+
++ Response 204 (application/json)
+
++ Response 400 (application/json)
+
+        {
+          "error": "Bad request",
+          "error_description": "There was a syntax error, check your params request and try it again."
+        }
+
++ Response 404 (application/json)
+
+        {
+          "error": "Not found",
+          "error_description": "The requested resource does not found."
+        }
