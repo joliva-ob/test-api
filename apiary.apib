@@ -15,35 +15,8 @@ Retrieve all the products
     + id (number, optional) ... Filter by the given product id.
 
 + Response 200 (application/json)
-
-        + Attributes (object)
-            + id: 250 (number, required)
-            + name: "Product 1" (string, required) - A product description
-            + type: EVENT (array[EVENT, ACTIVITY], required)
-        
-        + Body
-        
-            {
-                [
-                    {
-                        "id": 1,
-                        "name": "Product 1",
-                        "type": "EVENT"
-                    }, {
-                        "id": 2,
-                        "name": "Product 2",
-                        "type": "EVENT"
-                    }, {
-                        "id": 3,
-                        "name": "Product 3",
-                        "type": "ACTIVITY"
-                    }, {
-                        "id": 4,
-                        "name": "Product 4",
-                        "type": "ACTIVITY"
-                    }
-                ]
-            }
+    + Attributes
+        - products (Product)
 
 + Response 400 (application/json)
 
@@ -185,3 +158,11 @@ You can delete a given product identified by its id.
           "error": "Not found",
           "error_description": "The requested resource does not found."
         }
+        
+# Data Structures
+
+## Product (object)
+
+- id: `1` (number)
+- name: `Product 1` (string)
+- type: `EVENT` (string)
