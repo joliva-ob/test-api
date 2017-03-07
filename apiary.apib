@@ -5,12 +5,24 @@ HOST: http://products.apiblueprint.org/
 
 Products is a simple api to test the amazing features of apiblueprint format!
 
-## Products Collection [/products]
+## Products Collection [/products/{id}]
 
 ### List All Products [GET]
 
+Retrieve all the products
+
++ Parameters
+    + id (number, optional) ... Filter by the given product id.
+
 + Response 200 (application/json)
 
+        + Attributes (object)
+            + id: 250 (number, required)
+            + name: "Product 1" (string, required) - A product description
+            + type: EVENT (array[EVENT, ACTIVITY], required)
+        
+        + Body
+        
             {
                 [
                     {
