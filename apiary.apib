@@ -1,168 +1,312 @@
 FORMAT: 1A
-HOST: http://products.apiblueprint.org/
+HOST: http://pre.rest2.oneboxtickets.com/onebox-rest2/rest/
 
-# test-api
+# test api
 
-Products is a simple api to test the amazing features of apiblueprint format!
+![Onebox logo](http://developer.oneboxtickets.com/img/Banner-Onebox-Rest-Api-3.png "Onebox API logo")
 
-## Products Collection [/products/{id}]
+## API for distribution on sale channels.
+This API will let you implement the ONEBOX ticketing flow as follows:
 
-### List All Products [GET]
+Starting from authentication to retrieve a valid Oauth2 token, and then using that token to call any service.
 
-Retrieve all the products
+### Authentication
+
+0. OAUTH2 Bearer token
+
+### Basic booking flow
+
+1. Download product catalogue
+2. Availability (Widget or API)
+3. Add seats to shopping cart
+4. Create an order
+5. *Process payment (client side)*
+6. Confirm order
+7. Download ticket
+
+![Onebox logo](http://developer.oneboxtickets.com/img/APIFlow.png "API Flow")
+
+**Notice** that you also will be able to search for events and activities, to manage promotions and to navigate across venues.
+
+---
+
+
+
+## Authorization OAuth2 [/oauth/token{?grant_type,username,password}]
+
++ Attributes (Oauth2TokenResource)
+
+### Request Access Token [POST]
+
+It is needed to use an OAuth2 token to access the API. Write us on **api-support@oneboxtm.com** in order to reuest your *API_KEY* and *credentials*.
+
+Use this as shown in the following call in order to retrieve a token.
+
+Once you have a token you can use it in all API calls as shown below.
+
+**NOTE**: This endpoint must be accessed under https only.
+
++ Request (application/json)
+
+  + Headers
+
+            Authorization: Basic API_KEY
+            Accept: application/json
 
 + Parameters
-    + id (number, optional) ... Filter by the given product id.
+    + grant_type (required, enum[string]) ... Fixed value to `password`
+        + Members
+            + `password` - Indicates that the we are going to acreditate by password matching
+    + username (required, text) ... API client username
+    + password (required, text) ... API client password
 
-+ Response 200 (application/json)
-    + Attributes
-        - products (Product)
++ Response 201 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Oauth2TokenResource)
 
-+ Response 400 (application/json)
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
 
-        {
-          "error": "Bad request",
-          "error_description": "There was a syntax error, check your params request and try it again."
-        }
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
 
-+ Response 404 (application/json)
 
-        {
-          "error": "Not found",
-          "error_description": "The requested resource does not found."
-        }
+## Product Availability [/events/search{?eventType,startDate,endDate,venueId}]
 
-### Create a New Product [POST]
++ Attributes (EventsSearchResponseType)
 
-You can create your own products by posting a new resource with all its details.
+### Search for events [POST]
+
+Use this service to search for events and activities with any active session/performance from providers that bounds to your on sale distribution channel.
 
 + Request (application/json)
 
-        {
-            "name": "Product 5",
-            "type": "EVENT"
-        }
+  + Headers
 
-+ Response 201 (application/json)
+            Authorization: Bearer [ACCESS_TOKEN]
+            Accept: application/json
 
-    + Headers
++ Parameters
+    + eventType (optional, enum[string]) ... Choose between whether you wish **events** (ie: theater, music, futball) or **activities** (ie: theme parks)
+        + Members
+            + `EVENT` - Filter results to regular events (ie: theater, music, futball)
+            + `ACTIVITY` - Filter results to activities (ie: theme parks)
+    + startDate (optional, string, `2015-09-01T12:00:00+01:00`) ... Filter by session/performance with its start date greater or equals to the given startDate.
+    + endDate (optional, string, `2015-10-01T12:00:00+01:00`) ... Filter by session/performance with its end date lower or equals to the given endDate.
+    + venueId (optional, string) ... Filter events with active sessions/performances by the given venue id.
 
-            Location: /products/5
++ Response 200 (application/json;charset=UTF-8)
 
-    + Body
-
-            {
-                [
-                    {
-                        "id": 5,
-                        "name": "Product 5",
-                        "type": "ACTIVITY"
-                    }
-                ]
-            }
-
-+ Response 400 (application/json)
-
-        {
-          "error": "Bad request",
-          "error_description": "There was a syntax error, check your params request and try it again."
-        }
-
-+ Response 404 (application/json)
-
-        {
-          "error": "Not found",
-          "error_description": "The requested resource does not found."
-        }
-
-### Update a Product [PUT]
-
-You can modify a given product by putting a new resource details.
-
-+ Request (application/json)
-
-        {
-            "id": 3
-            "name": "Product 3",
-            "type": "ACTIVITY"
-        }
-
-+ Response 200 (application/json)
-
-    + Headers
-
-            Location: /products/3
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
 
     + Body
+    + Attributes (EventsSearchType)
 
-            {
-                [
-                    {
-                        "id": 3,
-                        "name": "Product 3",
-                        "type": "ACTIVITY"
-                    }
-                ]
-            }
-
-+ Response 400 (application/json)
-
-        {
-          "error": "Bad request",
-          "error_description": "There was a syntax error, check your params request and try it again."
-        }
-
-+ Response 404 (application/json)
-
-        {
-          "error": "Not found",
-          "error_description": "The requested resource does not found."
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /products/3
-
++ Response 400 (application/json;charset=UTF-8)
     + Body
+    + Attributes (Error400ResponseType)
 
-            {
-                [
-                    {
-                        "id": 3,
-                        "name": "Product 3",
-                        "type": "ACTIVITY"
-                    }
-                ]
-            }
-            
-### Delete a Product [DELETE]
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
 
-You can delete a given product identified by its id.
 
-+ Response 200 (application/json)
-
-+ Response 204 (application/json)
-
-+ Response 400 (application/json)
-
-        {
-          "error": "Bad request",
-          "error_description": "There was a syntax error, check your params request and try it again."
-        }
-
-+ Response 404 (application/json)
-
-        {
-          "error": "Not found",
-          "error_description": "The requested resource does not found."
-        }
-        
 # Data Structures
 
-## Product (object)
+## Oauth2TokenResource
++ access_token: `riIhmrgUvzJvVhts1UzjrK/ztPBrEERdtko=` (string, required) - The oauth token you just need to call any rest endpoint.
++ token_type (enum)
+    + bearer
++ refresh_token: `riIhmrgUvzJvVhts1UzjrK/ztPBrEERdtko=` (string, required) - The new oauth token you need to keep calling any rest endpoint.
++ expires_in: 123456 (number, required) - Remaining seconds until the token will expire.
++ scope (enum) - Notice the boundary of your current access grants.
+    + `api-adm-all` - Full access to the administration API
+    + `api-rest-int` - Restricted access to distribution API (Integration role)
++ authInfo: `xv193mp/riIhmrgUvzJvVhts1UzjrK/ztPBrEERdtko=` (string, required) - Just for internal use of Onebox.
++ jti: `65a18932-02b4-43fa-99cd-c97d5d2fd2a2` (string, required) - Just for internal use of Onebox.
 
-- id: `1` (number)
-- name: `Product 1` (string)
-- type: `EVENT` (string)
+## Error500ResponseType
++ statusCode: 1010 (number, required) - This is the Onebox error codes. Get the full list here: [go to Onebox error responses](http://developer.oneboxtickets.com/httpresponsecodes.html)
++ responseTime: `08-03-2017 13:46:03.657` (string, required)
+
+## Error400ResponseType
++ error: Bad request (string, required) - Short http error code description
++ error_description: There was a syntax error, check your params request and try it again. (string, required) - Detailed description of the error returned.
+
+## Error401ResponseType
++ error: Unauthorized (string, required) - Short http error code description.
++ error_description: Full authentication is required to access this resource (string, required) - Detailed description of the error returned.
+
+## EventsSearchResponseType
++ `events-search` (EventsSearchType)
+
+## EventsSearchType
++ `events-search-info` (array[EventSearchInfoType]) - List of events/activities products.
+
+## EventSearchInfoType
++ Include EventBasicInfoType
++ `sessions-search-info`(array[SessionSearchInfoType
+
+## CommunicationElementsType
++ language: `en_US` (string, required) - Indicates the language of the communitacion event details.
++ images (array[ImageType]) - List of related images as banners, logo's, backgrounds...
++ banners (array[BannerType]) - List of related banners to put into a website, pdf, ticket...
+
+## LanguageType
++ language: `en_US` (enum) - `List of the available languages for the event descriptions.`
+    + ca_ES - Català
+    + es_ES - Español
+    + en_US - English
+    + fr_FR - French
+    + it_IT - Italiano
+    + de_DE - Deutsch
+
+## ImageType
++ type: `LOGO_WEB` (string, required) - `Image categorization, ie: LOGO_WEB, IMG_BANNER_WEB, BODY_BACKGROUND.`
++ order: 1 (number, required) - Indicates just the order/priority in case of same type. This number is unique.
++ anyURI: `https://s3.amazonaws.com/onebox-repository/pro/1/475/evento/7877/366778_807931_1483100412907.jpg` (string, required) - Absolute path to the image file.
+
+## BannerType
++ type: `CHANNEL_PURCHASE_HEADER_BANNER`(string, required) - `Banner categorization, ie: CHANNEL_PURCHASE_HEADER_BANNER, CHANNEL_PURCHASE_BANNER, PROMOTER_PURCHASE_BANNER`
++ imageUrl: `https://s3.amazonaws.com/onebox-repository/pro/1/1/itemIdioma/1741/1_image_1340695930723.jpg`(string, required) - Absolute path to the banner image file.
++ linkUrl: `http://www.website.com/channel_id`(string, optional) - Direct link to the promotional site just in case.
+
+## TaxonomyType
++ id: 68 (number, required) - Unique identifier of this product segmentation.
++ code: APRTEM (string, required) - Unique identifier fo this product segmentation to be used in th API.
++ description: `Theme Parks` (string, required) - Short description to better understand the taxonomy segmentation.
+
+## DatetimeType
++ type: `EVENT_BEGIN` (enum) - Define the date meaning possibilites.
+    + EVENT_BEGIN
+    + EVENT_END
+    + SESSION_BEGIN
+    + SESSION_SALES_BEGIN
+    + SESSION_SALES_END
+    + SESSION_PUBLISHED
++ pendingConfirmation: false (boolean, optional) - Says whether the date is finally commited or not.
++ timeZoneId: `Europe/Berlin` (string, required) - Define the time zone worldwide from UTC.
++ value: `2018-01-07T19:00:00.000+01:00` (string, required) - XmlGregorianCalendar representation of the given date.
+
+## EntityType
++ name `Theme Park` (string, required) - Promotor/Organizer company name.
++ nif `A54343234` (string, required) - Tax/Vat unique identifier number.
++ email `info@theme.park` (string, required)
++ phoneNumber `0034 555 55 55` (string, required)
++ location (LocationType)
+
+## LocationType
++ address: `Av. Alcalde Pere Molas, km.2` (string, required) - Venue address where the event will be performed.
++ city: `Barcelona` (string, required) - City where the event will be performed.
++ postalCode: `SD-4324` (string,required) - Postal code or zip code where the event will be performed.
++ countrySubdivision (CodeValueType) - `Country subdivision, this shall be the province, state or county. Ie: ES-T - Tarragona.`
++ country (CodeValueType) - `Ie: ES - Spain.`
+
+## PromoterType
++ id: 475 (number, required) - Onebox internal unique identifier.
++ corporateName: `Theme Park Entertainment SA.` (string, required)
++ fiscalCode: `A53776307` (string, required) - Tax/Vat unique identifier number.
++ location (LocationType)
+
+## CodeValueType
++ code: `CODE` (string, required) - Item unique identifier.
++ value: `VALUE` (string, required) - Item value string.
+
+## IdNameType
++ id: 555 (number, required) - Unique identifier.
++ name: `NAME` (string, required) - Description name.
+
+## SessionSearchInfoType
++ id: 5553432 (number, required) - `Onebox session/performance unique identifier.`
++ rates: `7 days 1 park UK/PAP17` (string, required) - Rate description identifier.
++ internalName: `7 days 1 park` (string, required) - Product internal description name.
++ name: `7 days 1 park` (string, required) - Public product name depending on the language requestd.
++ dates (array[DatetimeType])
++ venue (VenueType)
++ space (IdNameType)
++ `event-basic-info` (EventBasicInfoType)
++ forSale: true (boolean, required) - Indicates the event is whether on sale or not.
++ hasProducts: false (boolean, required) - For Onebox box office purposes only.
++ admission: `ALL_AGES_ADMITTED` (enum) - Filter the age range to be admitted as an attendant.
+    + ALL_AGES_ADMITTED
+    + NOT_ADMITTED_UNDER_4
+    + NOT_ADMITTED_UNDER_7
+    + NOT_ADMITTED_UNDER_8
+    + NOT_ADMITTED_UNDER_12
+    + NOT_ADMITTED_UNDER_13
+    + NOT_ADMITTED_UNDER_14
+    + NOT_ADMITTED_UNDER_16
+    + NOT_ADMITTED_UNDER_18
+    + NOT_ADMITTED_UNDER_21
++ supportedVisitorType: `INDIVIDUAL` (enum)
+    + INDIVIDUAL
+    + GROUP
+    + MIXED
++ hideSessionDates: false (boolean, required) - For Onebox box office purposes only.
++ showDate: false (boolean, required) - For Onebox box office purposes only.
++ showDatetime: false (boolean, required) - For Onebox box office purposes only.
++ `availability-info` (AvailabilityInfoType)
++ `activity-ticket-types-availability` (array[ActivityTicketTypeAvailabilityType])
++ visitorGroupAvailability (visitorGroupAvailabilityType)
+
+## VenueType
++ id: 432432 (number, required) - Onebox internal venue unique identifier.
++ name: `World Park` (string, required) - Public venue name.
++ timeZone: `Europe/Berlin` (string, required) - Define the time zone worldwide from UTC.
++ location (LocationType)
+
+## EventBasicInfoType
++ id: 23454 (number, required) - Unique identifier for each event/activity product.
++ externalReferenceCode: `EXT-123` (string, required) - In case of product from 3rd party suppliers, those came with its own reference.
++ title: `Theme Park` (string, required) - Event main title
++ subtitle: `¡Discover the 6 worlds adrenaline!` (string, required) - Event secondary title
++ shortDescription: `<P ALIGN=\"LEFT\">Six amazing worlds in just one Park, perfect for having fun in family and frends as well.</P>`(string, required) - Event short description
++ longDescription: `<P ALIGN=\"LEFT\">Explore a whole world of fun and know our amazing theme parks. An ideal destination for a family getaway, located in one of the best tourist areas of Spain and just an hour from Barcelona! </ P> <BR/> <P ALIGN = \ "LEFT \"> The best entertainment, relaxation, gastronomy and shopping you can imagine. > A DESTINY AND SIX WORLDS TO DISCOVER </ P> <P ALIGN = \ "LEFT \"> Here begins a journey that takes you much further than you can imagine. At PortAventura Park we look forward to six fascinating worlds completely different, with a careful decoration to the last detail, so that you enjoy to the maximum. Emotions for all tastes. Families, friends, big and small: in our theme park, all the fun.</P>` (string, required) - Event detailed description
++ `communication-elements` (CommunicationElementsType)
++ taxonomy (TaxonomyType)
++ languages (array[LanguageType])
++ dates (array[DatetimeType])
++ entidad (EntityType)
++ promotor (PromoterType)
++ severalVenues: false (boolean, required) - Is the event performed in different venues?
++ severalLocations: false (boolean, required) - Is the event perfomed in different locations?
++ supraEvent: false (boolean, required) - Is the event a sibling from another parent event?
++ giftTicket: false (boolean, required) - Has this event free entrance tickets allowed?
++ nominal: false (boolean, required) - Has the ticket to indicate the owner name / surname / id details?
++ eventType (enum)
+    + EVENT - General event like theater, music, football.
+    + ACTIVITY - Museums, theme parks, seatless performances in general.
+
+## visitorGroupAvailabilityType
++ totalVisitorGroups: 0 (number, optional) - For Onebox internal use only.
++ availableVisitorGroups: 0 (number, optional) - For Onebox internal use only.
+
+## ActivityTicketTypeAvailabilityType
+- Include IdNameType
++ code: ZP1 (string, required) - Product availability code.
++ individualPrice (IndividualPriceType)
++ visitorGroupPricingType (enum)
+    + PER_GROUP
+    + PER_ASSISTANT
++ color: `#FFFFFF` (string, optional) - For Onebox internal use only.
++ `availability-info` (AvailabilityInfoType)
+
+## AvailabilityInfoType
++ total: 2500 (number, optional) - Total venue capacity.
++ available: 2000 (number, optional) - Available seats to be reserved.
+
+## IndividualPriceType
++ originalBasePrice: `100.00` (number, required) - PVP public price.
++ originalBasePriceCharges (array[ChargeType])
++ promotedPrice: `100.0`(number, required) - PVP promoted price just in case there is any promotion applied, otherwise this price will be always the same as originalBasePrice.
++ promotedPriceCharges (array[ChargeType])
+
+## ChargeType
++ type (enum)
+    + CHANNEL_CHARGE
+    + PROMOTER_CHARGE
++ value `1.5` (number, required) - Value of the charge.
