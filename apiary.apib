@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: http://gateway-pre.oneboxtickets.net/onebox-rest2/rest/
 
-# TEST Ticket distribution API
+# Ticket distribution API
 
 ![Onebox logo](http://developer.oneboxtickets.com/img/Banner-Onebox-Rest-Api-3.png "Onebox API logo")
 
@@ -19,30 +19,30 @@ The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authen
 ### 2. Basic booking flow
 
 1. Download product catalogue
-2. Availability (Widget or API)
+2. Check availability (Widget or API)
 3. Add seats to shopping cart
 4. Create an order
 5. *Process payment (client side)*
-6. Confirm order
+6. Confirm the order
 7. Download ticket
 
 ![Onebox logo](http://developer.oneboxtickets.com/img/APIFlow.png "API Flow")
 
-**Notice** that you also will be able to search for events and activities, to manage promotions and to navigate across venues. Must see the distribution API online documentation: [Onebox Distribution API Documentation](http://developer.oneboxtickets.com)
+**Notice** that you also will be able to search for events and activities, to manage promotions/discounts and to navigate across numbered venues. Must see the distribution API online documentation: [Onebox Distribution API Documentation](http://developer.oneboxtickets.com)
 
 ---
 
 
 
-## Product Availability [/events/search{?eventType,startDate,endDate,venueId}]
+## Product Catalogue [/events/search{?eventType,startDate,endDate,venueId}]
 
 + Attributes (EventsSearchResponseType)
 
-### Search for product [GET]
+### Search for products [GET]
 
-Use this service to search for events and activities with any active session/performance from providers that bounds to your on sale distribution channel.
+Use this service to search for events and activities with active performances available from providers linked to your on sale distribution channel.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/events-search.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/events-search.xml)
 
 + Request
 
@@ -83,15 +83,15 @@ Use this service to search for events and activities with any active session/per
     + Attributes (Error500ResponseType)
 
 
-## Event information [/event/{idEvent}/info{?startDate,endDate,showNotPublishedInfo}]
+## Events [/event/{idEvent}/info{?startDate,endDate,showNotPublishedInfo}]
 
 + Attributes (EventInfoResponseType)
 
-### Search for event [GET]
+### Search for event info [GET]
 
-Use this service to get event information.
+Use this service to get event and its performance dates with detailed information.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/event-info.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/event-info.xml)
 
 + Request
 
@@ -129,15 +129,15 @@ Use this service to get event information.
     + Attributes (Error500ResponseType)
 
 
-## Session information [/session/{idSession}/info{?showNotPublishedInfo}]
+## Sessions and Performances [/session/{idSession}/info{?showNotPublishedInfo}]
 
 + Attributes (SessionInfoResponseType)
 
-### Search for session [GET]
+### Search for session info [GET]
 
-Use this service to get event information.
+Use this service to get session/performance availability and information details.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/session-info.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/session-info.xml)
 
 + Request
 
@@ -172,13 +172,16 @@ Use this service to get event information.
     + Body
     + Attributes (Error500ResponseType)
 
-## Create shoppingCart [/shoppingCart/create]
+
+## Shopping Cart [/shoppingCart/create]
 
 + Attributes (CreateShoppingCartResponseType)
 
 ### Create a new shoppingCart [POST]
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-create.xml)
+This will return a token id as a unique identifier.
+
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-create.xml)
 
 + Request
 
@@ -207,15 +210,94 @@ Use this service to get event information.
     + Body
     + Attributes (Error500ResponseType)
 
+## Add Best seats [/shoppingCart/addBestSeats{?seatsList,token,totalCharges}]
+
++ Attributes (AddSeatsResponseType)
+
+## Add seats [/shoppingCart/addSeats{?seatsList,token,totalCharges}]
++ Attributes (ShoppingCartAddSeatsResponseType)
+### Add desired seats [POST]
+Use this service to add the desired seats to the shopping cart. The added seats will be no longer available for any other buyer until the is released, or the shopping cart expires. It's necessary to call session/{sessionId}/seatMap/view/{viewId} and session/{sessionId}/seatStatus/{viewId} previosly in order to obtain the seats ids and the status.
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addSeats.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + seatsList: `seats-list` (array[SeatType], required)
+    + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+    + totalCharges: 120 (number, optional) ... Chargues to apply
++ Response 200 (application/json;charset=UTF-8)
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+    + Body
+    + Attributes (ShoppingCartType)
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
+## Add best seats [/shoppingCart/addBestSeats{?idSession,idView,idPriceZone,idSector,notNumberedZone,idsShares,numSeats,blockingReason,token,totalCharges}]
++ Attributes (ShoppingCartAddBestSeatsResponseType)
+
+### Add the best seats [POST]
+Use this service to add the best seats to the shopping cart. The added seats will be no longer available for any other buyer until the is released, or the shopping cart expires. The [Optional] parameters narrows the number of seats in which the platform will try to fit the best location for the desired number of seats.
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addBestSeats.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + idSession: 123 (number, required) ... ShoppingCartAddBestSeatsType
+    + idView: 123 (number, optional) ... View identifier
+    + idPriceZone: 123 (number, optional) ... Price zone identifier
+    + idSector: 123 (number, optional) ... Sector identifier
+    + notNumberedZone: 123 (number, optional) ... Not numbered zone identifier
+    + idsShares: 10, 12, 15 (array[number], optional) ... List of shares identifiers
+    + numSeats: 3 (number, required) ... Number of seat to add to the shopping cart
+    + blockingReason: 1 (number, optional) ... Blocking reason identifier (only for promoters)
+    + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+    + totalCharges: 120 (number, optional) ... Chargues to apply
++ Response 200 (application/json;charset=UTF-8)
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+    + Body
+    + Attributes (ShoppingCartType)
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
 ## Add individual activity seats [/shoppingCart/addIndividualActivitySeats{?token,idSession,numSeats,idActivityTicketType}]
++ Attributes (AddIndividualActivitySeatsResponseType)
 
- + Attributes (AddIndividualActivitySeatsResponseType)
+### Add individual activity seats [POST]
 
-### Add seats to individual activity [POST]
+Use this service to add individual activity seats to an existing shopping cart identified by a token id. The seats will be locked up to 10 minutes.
 
-Use this service to add seats to individual acttivity
-
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addIndividualActivitySeats.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addIndividualActivitySeats.xml)
 
 + Request
 
@@ -253,15 +335,283 @@ Use this service to add seats to individual acttivity
     + Body
     + Attributes (Error500ResponseType)
 
-## Add Client data [/shoppingCart/clientData{?token,email,firstName,lastName,birthday,telephone,identification,identificationType,gender,address,city,postalCode,countryCode,countrySubdivisionCode,allowCommercialMailing,ticketEmail,receiptEmail,additionalInsuranceData,notes}]
+## Add discount [/shoppingCart/addDiscount{?discount,items,token,forceLimits,totalCharges}]
+
++ Attributes (ShoppingCartAddDiscountResponseType)
+
+### Add a discount [POST]
+
+Use this service to add a discount to one or more seats. Some discounts needs a minimum of seats to be valid, then the minimun number of seats must be added in the same use of this call
+
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addDiscount.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + discount: `discount` (DiscountType, required) ... Discount info (identifier, group id and validations)
+    + items: 10, 12, 15 (array[number], required) ... ShoppingCart items
+    + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+    + forceLimits: false (boolean, optional)
+    + totalCharges: 120 (number, optional) ... Chargues to apply
+
++ Response 200 (application/json;charset=UTF-8)
+
+        + Headers
+            traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+            OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+  + Body
+  + Attributes (ShoppingCartType)
+
++ Response 400 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error500ResponseType)
+
+## Add promotion [/shoppingCart/addPromotion{?promotion,items,token,forceLimits,totalCharges}]
+
++ Attributes (ShoppingCartAddPromotionResponseType)
+
+### Add a promotion [POST]
+
+Use this service to add a promotion to one or more seats. Some promotions needs a minimum of seats to be valid, then the minimun number of seats must be added in the same use of this call
+
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addPromotion.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+  + promotion: `promotion` (PromotionType, required) ... Promotion info (identifier, group id and validations)
+  + items: 10, 12, 15 (array[number], required) ... ShoppingCart items
+  + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+  + forceLimits: false (boolean, optional)
+  + totalCharges: 120 (number, optional) ... Chargues to apply
+
++ Response 200 (application/json;charset=UTF-8)
+
+          + Headers
+              traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+  + Body
+  + Attributes (ShoppingCartType)
+
++ Response 400 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error500ResponseType)
+
+## Available Promotions And Discounts [/shoppingCart/availablePromotionsAndDiscounts{?token}]
+
++ Attributes (ShoppingCartAvailablePromotionsAndDiscountsResponseType)
+
+### Available Promotions And Discounts [GET]
+
+Use this service to return all the promotions and discounts applicable for each item.
+
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-availablePromotionsAndDiscounts.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+  + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+
++ Response 200 (application/json;charset=UTF-8)
+
+          + Headers
+              traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+  + Body
+  + Attributes (ShoppingCartAvailableSalesType)
+
++ Response 400 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error500ResponseType)
+
+## Add promotional code [/shoppingCart/promotionalCodeGroup{?token,promotionalCode,idGroup}]
+
++ Attributes (ShoppingCartPromotionalCodeGroupResponseType)
+
+### Add a promotional code [POST]
+
+Use this service to return a promotion or discount where the promotional code is applicable for.
+
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-promotionalCodeGroup.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+  + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+  + promotionalCode: `00000000A` (string, required) ... Promotional code
+  + idGroup: 123 (number, optional) ... Group identifier
+
++ Response 200 (application/json;charset=UTF-8)
+
+          + Headers
+              traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+  + Body
+  + Attributes (PromotionalCodeApplicableGroupType)
+
++ Response 400 (application/json;charset=UTF-8)
+  + Body
+  + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
+## Release discount [/shoppingCart/releaseDiscount{?discount,items,token,totalCharges}]
+
++ Attributes (ShoppingCartReleaseDiscountResponseType)
+
+### Release a discount [POST]
+
+Use this service to release a discount from the desired seats.
+
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-releaseDiscount.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + discount: ´discount´ (DiscountType, required) ... Discount info (identifier)
+    + items: 10, 12, 15 (array[number], required) ... ShoppingCart items
+    + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+    + totalCharges: 120 (number, optional) ... Chargues to apply
+
++ Response 200 (application/json;charset=UTF-8)
+
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+    + Body
+    + Attributes (ShoppingCartType)
+
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
+## Release promotion [/shoppingCart/releasePromotion{?promotion,items,token,totalCharges}]
+
++ Attributes (ShoppingCartReleasePromotionResponseType)
+
+### Release a promotion [POST]
+
+Use this service to release a promotion from the desired seats.
+
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-releasePromotion.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + promotion: ´promotion´ (PromotionType, required) ... Promotion info (identifier)
+    + items: 10, 12, 15 (array[number], required) ... ShoppingCart items
+    + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+    + totalCharges: 120 (number, optional) ... Chargues to apply
+
++ Response 200 (application/json;charset=UTF-8)
+
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+    + Body
+    + Attributes (ShoppingCartType)
+
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
+## Client Data [/shoppingCart/clientData{?token,email,firstName,lastName,birthday,telephone,identification,identificationType,gender,address,city,postalCode,countryCode,countrySubdivisionCode,allowCommercialMailing,ticketEmail,receiptEmail,additionalInsuranceData,notes}]
 
 + Attributes (ClientDataResponseType)
 
-### Client Data  [POST]
+### Add client data  [POST]
 
-Use this service to add Client Data to shopping cart
+Use this service to add Client Data to a shopping cart.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-clientData.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-clientData.xml)
 
 + Request
 
@@ -314,15 +664,16 @@ Use this service to add Client Data to shopping cart
     + Body
     + Attributes (Error500ResponseType)
 
+
 ## Delivery [/shoppingCart/delivery{?orderDeliveryCost,token,type}]
 
 + Attributes (DeliveryResponseType)
 
-### Delivery  [POST]
+### Set delivery method  [POST]
 
-Use this service to add sets of delivery method and the costs per item and costs per order
+Use this service to add sets of delivery method and the costs per item and costs per order.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-delivery.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-delivery.xml)
 
 + Request
 
@@ -366,15 +717,16 @@ Use this service to add sets of delivery method and the costs per item and costs
     + Body
     + Attributes (Error500ResponseType)
 
-## Create Order [/order/createOrder{?token,orderType,items,itemsChannelCharges,notes,skipClientValidations}]
+
+## Pre-Book an Order [/order/createOrder{?token,orderType,items,itemsChannelCharges,notes,skipClientValidations}]
 
 + Attributes (CreateOrderResponseType)
 
 ### Create a new order [POST]
 
-Use this service to create a new order.
+Use this service to create a new order from a given shopping cart token id. This will increase the seats lock time up to 45 minutes.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/order-createOrder.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/order-createOrder.xml)
 
 + Request
 
@@ -416,15 +768,15 @@ Use this service to create a new order.
     + Attributes (Error500ResponseType)
 
 
-## Commit Order [/order/commitOrder{?orderCode,payments,bookingExpireDate,suspectFraud,notes}]
+## Confirm an Order [/order/commitOrder{?orderCode,payments,bookingExpireDate,suspectFraud,notes}]
 
 + Attributes (CommitOrderResponseType)
 
-### Commit a order [POST]
+### Commit an order [POST]
 
-Use this service to commit a order.
+Use this service to definetly commit an order, notice that the availability can't be released through the API afterwards.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/order-commitOrder.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/order-commitOrder.xml)
 
 + Request
 
@@ -462,15 +814,16 @@ Use this service to commit a order.
     + Body
     + Attributes (Error500ResponseType)
 
-## Tickets generation [/order/ticketsPDF{?orderCode,items,includeReceipt,merged}]
+## Tickets [/order/ticketsPDF{?orderCode,items,includeReceipt,merged}]
 
 + Attributes (OrderTicketsPDFResponseType)
 
-### Obtains the tickets [GET]
+### Download the Tickets [GET]
 
-Use this service to obtains the tickets of the order items if the order is in committed status. The tickets generation is processed asynchronously, while the tickets are not available the http error code (from 1088) will be returned, then you have to retry.
+Use this service to retrive the tickets of a given order, bear in mind the order must be already confirmed. The tickets generation are processed asynchronously, in the meantime the tickets are not available, an http error code (1088) will be returned, hence you will have to retry it until get an http 200 status code.
+**Notice** that we strongly reccommend you to set a delay time of 1 second at least between each call and never keep sending requests after 30 seconds of polling, thank you.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/order-ticketsPDF.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/order-ticketsPDF.xml)
 
 + Request
 
@@ -481,8 +834,8 @@ Use this service to obtains the tickets of the order items if the order is in co
             Accept: application/json
 
 + Parameters
-    + orderCode: : `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... ... Order code.
-    + items: 00000001 (number, optional) ... List of product IDs. All product IDs are selected if not specified.
+    + orderCode: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Order code.
+    + items: 10, 22, 15 (array[number], optional) ... List of product IDs. All product IDs are selected if not specified.
     + includeReceipt: true (boolean, optional) ... Indicate if include receipt.
     + merged: true (boolean, optional) ... Indicate if merge.
 
@@ -1115,11 +1468,84 @@ Use this service to obtains the tickets of the order items if the order is in co
 ## CreateShoppingCartResponseType
 + `create-shoopingcart` (CreateShoppingCartType)
 
+## SeatType
++ @id: 123 (number, required)
++ @sessionId: 123 (number, required)
+
+## ShoppingCartAddSeatsType
++ Include ShoppingCartType
+
+## ShoppingCartAddSeatsResponseType
++ `shoppingCart-add-seats` (ShoppingCartAddSeatsType)
+
+## ShoppingCartAddBestSeatsType
++ Include ShoppingCartType
+
+## ShoppingCartAddBestSeatsResponseType
++ `shoppingCart-add-best-seats` (ShoppingCartAddBestSeatsType)
+
 ## AddIndividualActivitySeatsType
 + Include ShoppingCartType
 
 ## AddIndividualActivitySeatsResponseType
 + `add-individual-activity-seats` (AddIndividualActivitySeatsType)
+
+## AddSeatsType
++ Include ShoppingCartType
+
+## AddSeatsResponseType
++ `add-seats` (AddSeatsType)
+
+## ShoppingCartAddDiscountType
++ Include ShoppingCartType
+
+## ShoppingCartAddDiscountResponseType
++ `shoppingCart-add-discount` (ShoppingCartAddDiscountType)
+
+## ShoppingCartAddPromotionType
++ Include ShoppingCartType
+
+## ShoppingCartAddPromotionResponseType
++ `shoppingCart-add-promotion` (ShoppingCartAddPromotionType)
+
+## shoppingCartItemSalesType
++ @id: 150 (number, required)
++ discounts (DiscountsType, optional)
++ promotions (PromotionsType, optional)
+
+## ShoppingCartAvailableSalesType
++ @currency: `EUR` (string, required)
++ @timeLeft (number, required)
++ @token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required)
++ `shopping-cart-item-sales` (shoppingCartItemSalesType, required)
+
+## ShoppingCartAvailablePromotionsAndDiscountsType
++ Include ShoppingCartAvailableSalesType
+
+## ShoppingCartAvailablePromotionsAndDiscountsResponseType
++ `shoppingCart-available-promotions-and-discounts` (ShoppingCartAvailablePromotionsAndDiscountsType)
+
+## PromotionalCodeApplicableGroupType
++ @idGroup: 123 (number, required)
++ @promotionalCode: `00000000A` (string, required)
+
+## ShoppingCartPromotionalCodeGroupType
++ Include PromotionalCodeApplicableGroupType
+
+## ShoppingCartPromotionalCodeGroupResponseType
++ `shoppingCart-promotional-code-group` (ShoppingCartPromotionalCodeGroupType)
+
+## ShoppingCartReleaseDiscountType
++ Include ShoppingCartType
+
+## ShoppingCartReleaseDiscountResponseType
++ `shoppingCart-release-discount` (ShoppingCartReleaseDiscountType)
+
+## ShoppingCartReleasePromotionType
++ Include ShoppingCartType
+
+## ShoppingCartReleasePromotionResponseType
++ `shoppingCart-release-promotion` (ShoppingCartReleasePromotionType)
 
 ## ClientDataResponseType
 + `client-data-shopping-cart` (ShoppingCartType)
