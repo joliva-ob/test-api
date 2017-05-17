@@ -32,7 +32,8 @@ The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authen
 
 ---
 
-
+# Group Contents and Availability
+Group of all contents and availability.
 
 ## Product Catalogue [/events/search{?eventType,startDate,endDate,venueId}]
 
@@ -172,6 +173,8 @@ Use this service to get session/performance availability and information details
     + Body
     + Attributes (Error500ResponseType)
 
+# Group ShoppingCart
+Group of all Shopping Cart
 
 ## Shopping Cart [/shoppingCart/create]
 
@@ -726,6 +729,7 @@ Use this service to add sets of delivery method and the costs per item and costs
     + Body
     + Attributes (Error500ResponseType)
 
+
 ## Release Items [/shoppingCart/releaseItems{?items,token}]
 
 + Attributes (ShoppingCartReleaseItemsResponseType)
@@ -769,6 +773,8 @@ Use this service to release the seats from the shopping cart and makes it availa
     + Body
     + Attributes (Error500ResponseType)
 
+# Group Order
+Group of all orders
 
 ## Pre-Book an Order [/order/createOrder{?token,orderType,items,itemsChannelCharges,notes,skipClientValidations}]
 
@@ -866,6 +872,8 @@ Use this service to definetly commit an order, notice that the availability can'
     + Body
     + Attributes (Error500ResponseType)
 
+# Group Tickets
+Group of all tickets
 
 ## Tickets [/order/ticketsPDF{?orderCode,items,includeReceipt,merged}]
 
