@@ -32,14 +32,14 @@ The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authen
 
 ---
 
-# Group Contents and Availability
-Group of all contents and availability.
+# Group 1. Contents and Availability
+This group contains all the related services and resources about contents like events, activities or session performances and its availability.
 
 ## Product Catalogue [/events/search{?eventType,startDate,endDate,venueId}]
 
 + Attributes (EventsSearchResponseType)
 
-### Search for products [GET]
+### Get product catalogue [GET]
 
 Use this service to search for events and activities with active performances available from providers linked to your on sale distribution channel.
 
@@ -88,7 +88,7 @@ Use this service to search for events and activities with active performances av
 
 + Attributes (EventInfoResponseType)
 
-### Search for event info [GET]
+### Get event info [GET]
 
 Use this service to get an event and its performances dates with detailed information.
 
@@ -134,7 +134,7 @@ Use this service to get an event and its performances dates with detailed inform
 
 + Attributes (SessionInfoResponseType)
 
-### Search for session info [GET]
+### Get session info [GET]
 
 Use this service to get session/performance availability and information details.
 
@@ -173,8 +173,8 @@ Use this service to get session/performance availability and information details
     + Body
     + Attributes (Error500ResponseType)
 
-# Group ShoppingCart
-Group of all Shopping Cart
+# Group 2. Shopping Cart
+This group contains all the related services and resources to let you manage a shopping basket (add/release product items).
 
 ## Shopping Cart [/shoppingCart/create]
 
@@ -218,7 +218,7 @@ This will return a token id as a unique identifier.
 
 + Attributes (ShoppingCartAddSeatsResponseType)
 
-### Add desired seats [POST]
+### Add numbered seats [POST]
 
 Use this service to add the desired seats to the shopping cart. The already added seats will be no longer available for any other buyer until those will be released, or the shopping cart expires. It's necessary to call session/{sessionId}/seatMap/view/{viewId} and session/{sessionId}/seatStatus/{viewId} previosly in order to obtain the seats ids and statuses.
 [XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addSeats.xml)
@@ -385,11 +385,11 @@ Use this service to retrieve all the promotions and discounts available for each
   + Attributes (Error500ResponseType)
 
 
-## Promotional Collective Codes [/shoppingCart/promotionalCodeGroup{?token,promotionalCode,idGroup}]
+## Promotional Group Codes [/shoppingCart/promotionalCodeGroup{?token,promotionalCode,idGroup}]
 
 + Attributes (ShoppingCartPromotionalCodeGroupResponseType)
 
-### Get promotional codes [POST]
+### Get promotional group codes [POST]
 
 Use this service to retrieve the available promotional offer codes where the promotional code is applicable for.
 
@@ -734,7 +734,7 @@ Use this service to add sets of delivery method and the costs per item and costs
 
 + Attributes (ShoppingCartReleaseItemsResponseType)
 
-### Release some items [POST]
+### Release selected items [POST]
 
 Use this service to release the seats from the shopping cart and makes it available for anyone.
 
@@ -773,8 +773,8 @@ Use this service to release the seats from the shopping cart and makes it availa
     + Body
     + Attributes (Error500ResponseType)
 
-# Group Order
-Group of all orders
+# Group 3. Order
+This group contains all the related services and resources to be able to create a pre-booking order from a given shoppingcart, to release its items and to finally confirm it.
 
 ## Pre-Book an Order [/order/createOrder{?token,orderType,items,itemsChannelCharges,notes,skipClientValidations}]
 
@@ -830,7 +830,7 @@ Use this service to create a new order from a given shopping cart token id. This
 
 + Attributes (CommitOrderResponseType)
 
-### Commit an existing order [POST]
+### Confirm an existing order [POST]
 
 Use this service to definetly commit an order, notice that the availability can't be released through the API afterwards.
 
@@ -872,14 +872,14 @@ Use this service to definetly commit an order, notice that the availability can'
     + Body
     + Attributes (Error500ResponseType)
 
-# Group Tickets
-Group of all tickets
+# Group 4. Tickets
+This group contains all the related services and resources to generate tickets or to get its information to let the client make it at their end.
 
 ## Tickets [/order/ticketsPDF{?orderCode,items,includeReceipt,merged}]
 
 + Attributes (OrderTicketsPDFResponseType)
 
-### Download the Tickets [GET]
+### Download the PDF Tickets [GET]
 
 Use this service to retrive the tickets of a given order, bear in mind the order must be already confirmed. The tickets generation are processed asynchronously, in the meantime the tickets are not available, an http error code (1088) will be returned, hence you will have to retry it until get an http 200 status code.
 **Notice** that we strongly reccommend you to set a delay time of 1 second at least between each call and never keep sending requests after 30 seconds of polling, thank you.
