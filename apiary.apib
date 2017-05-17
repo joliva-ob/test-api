@@ -717,6 +717,49 @@ Use this service to add sets of delivery method and the costs per item and costs
     + Body
     + Attributes (Error500ResponseType)
 
+## Release Items [/shoppingCart/releaseItems{?items,token}]
+
++ Attributes (ShoppingCartReleaseItemsResponseType)
+
+### Release some items [POST]
+
+Use this service to release the seats from the shopping cart and makes it available for anyone.
+
+[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-releaseItems.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + items: 10, 12, 15 (array[number], required) ... ShoppingCart items
+    + token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Shopping cart identifier
+
++ Response 200 (application/json;charset=UTF-8)
+
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+    + Body
+    + Attributes (ShoppingCartType)
+
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
 
 ## Pre-Book an Order [/order/createOrder{?token,orderType,items,itemsChannelCharges,notes,skipClientValidations}]
 
@@ -1552,6 +1595,12 @@ Use this service to retrive the tickets of a given order, bear in mind the order
 
 ## DeliveryResponseType
 + `delivery-shopping-cart` (ShoppingCartType)
+
+## ShoppingCartReleaseItemsType
++ Include ShoppingCartType
+
+## ShoppingCartReleaseItemsResponseType
++ `shoppingCart-release-items` (ShoppingCartReleaseItemsType)
 
 ## ItemChannelChargesType
 + itemId: 123 (number, required)
