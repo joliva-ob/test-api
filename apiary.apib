@@ -28,7 +28,7 @@ The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authen
 
 ![Onebox logo](http://developer.oneboxtickets.com/img/APIFlow.png "API Flow")
 
-**Notice** that you also will be able to search for events and activities, to manage promotions/discounts and to navigate across numbered venues. Must see the distribution API online documentation: [Onebox Distribution API Documentation](http://developer.oneboxtickets.com)
+**Notice** that you also will be able to search for availability and navigate across numbered venues. Must see the distribution API online documentation: [Onebox Distribution API Documentation](http://developer.oneboxtickets.com)
 
 ---
 
@@ -89,7 +89,7 @@ Use this service to search for events and activities with active performances av
 
 ### Search for event info [GET]
 
-Use this service to get event and its performance dates with detailed information.
+Use this service to get an event and its performances dates with detailed information.
 
 [XML sample response](http://developer.oneboxtickets.com/api-support/event-info.xml)
 
@@ -177,7 +177,7 @@ Use this service to get session/performance availability and information details
 
 + Attributes (CreateShoppingCartResponseType)
 
-### Create a new shoppingCart [POST]
+### Create a new Shopping Cart [POST]
 
 This will return a token id as a unique identifier.
 
@@ -210,14 +210,14 @@ This will return a token id as a unique identifier.
     + Body
     + Attributes (Error500ResponseType)
 
-## Add Best seats [/shoppingCart/addBestSeats{?seatsList,token,totalCharges}]
 
-+ Attributes (AddSeatsResponseType)
+## Add Seats [/shoppingCart/addSeats{?seatsList,token,totalCharges}]
 
-## Add seats [/shoppingCart/addSeats{?seatsList,token,totalCharges}]
 + Attributes (ShoppingCartAddSeatsResponseType)
+
 ### Add desired seats [POST]
-Use this service to add the desired seats to the shopping cart. The added seats will be no longer available for any other buyer until the is released, or the shopping cart expires. It's necessary to call session/{sessionId}/seatMap/view/{viewId} and session/{sessionId}/seatStatus/{viewId} previosly in order to obtain the seats ids and the status.
+
+Use this service to add the desired seats to the shopping cart. The already added seats will be no longer available for any other buyer until those will be released, or the shopping cart expires. It's necessary to call session/{sessionId}/seatMap/view/{viewId} and session/{sessionId}/seatStatus/{viewId} previosly in order to obtain the seats ids and statuses.
 [XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addSeats.xml)
 
 + Request
@@ -248,11 +248,14 @@ Use this service to add the desired seats to the shopping cart. The added seats 
     + Body
     + Attributes (Error500ResponseType)
 
-## Add best seats [/shoppingCart/addBestSeats{?idSession,idView,idPriceZone,idSector,notNumberedZone,idsShares,numSeats,blockingReason,token,totalCharges}]
+
+## Add Best Seats [/shoppingCart/addBestSeats{?idSession,idView,idPriceZone,idSector,notNumberedZone,idsShares,numSeats,blockingReason,token,totalCharges}]
+
 + Attributes (ShoppingCartAddBestSeatsResponseType)
 
-### Add the best seats [POST]
-Use this service to add the best seats to the shopping cart. The added seats will be no longer available for any other buyer until the is released, or the shopping cart expires. The [Optional] parameters narrows the number of seats in which the platform will try to fit the best location for the desired number of seats.
+### Add best seats automatically [POST]
+
+Use this service to add the best seats available to the shopping cart. The added seats will be no longer available for any other buyer until those will be released, or the shopping cart expires. The [Optional] parameters filters the available seats which fits with the request as better as possible.
 [XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addBestSeats.xml)
 
 + Request
