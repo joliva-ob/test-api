@@ -12,6 +12,10 @@ The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authen
 
 ![Onebox Oauth2 flow](http://developer.oneboxtickets.com/img/OUTH2-API-diagram-flow.png "Onebox OAuth2 flow")
 
+### 0. Get your API-KEY and credentials
+An API-KEY and username+password credentials are needed to be able to use our API, if you are interested with, please fulfill the request form:
+<input type="text" id="name" name="name"/>
+
 ### 1. Authentication
 
 1. OAUTH2 Bearer token
@@ -29,6 +33,18 @@ The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authen
 ![Onebox logo](http://developer.oneboxtickets.com/img/APIFlow.png "API Flow")
 
 **Notice** that you also will be able to search for availability and navigate across numbered venues. Must see the distribution API online documentation: [Onebox Distribution API Documentation](http://developer.oneboxtickets.com)
+
+## Certification Process
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## API Error codes
+Posar taula markdown
+
+## Auditory
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## Contact
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ---
 
@@ -884,7 +900,7 @@ Use this service to definetly commit an order, notice that the availability can'
 # Group 4. Tickets
 This group contains all the related services and resources to generate tickets or to get its information to let the client make it at their end.
 
-## Tickets [/order/ticketsPDF{?orderCode,items,includeReceipt,merged}]
+## Tickets PDF [/order/ticketsPDF{?orderCode,items,includeReceipt,merged}]
 
 + Attributes (OrderTicketsPDFResponseType)
 
@@ -894,6 +910,52 @@ Use this service to retrive the tickets of a given order, bear in mind the order
 **Notice** that we strongly reccommend you to set a delay time of 1 second at least between each call and never keep sending requests after 30 seconds of polling, thank you.
 
 [XML sample response](http://developer.oneboxtickets.com/api-support/order-ticketsPDF.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + orderCode: `188a5cf2a844e684375172cb1cf2bbf3` (string, required) ... Order code.
+    + items: 10, 22, 15 (array[number], optional) ... List of product IDs. All product IDs are selected if not specified.
+    + includeReceipt: true (boolean, optional) ... Indicate if include receipt.
+    + merged: true (boolean, optional) ... Indicate if merge.
+
++ Response 200 (application/json;charset=UTF-8)
+
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+    + Body
+    + Attributes (OrderTicketsPDFType)
+
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
+## Tickets Information [/order/ticketsInfo{?orderCode,items,includeReceipt,merged}]
+
++ Attributes (OrderTicketsPDFResponseType)
+
+### Get the tickets information [GET]
+
+Use this service to retrive the tickets of a given order, bear in mind the order must be already confirmed. The tickets generation are processed asynchronously, in the meantime the tickets are not available, an http error code (1088) will be returned, hence you will have to retry it until get an http 200 status code.
+**Notice** that we strongly reccommend you to set a delay time of 1 second at least between each call and never keep sending requests after 30 seconds of polling, thank you.
+
+[XML sample response](http://developer.oneboxtickets.com/api-support/order-ticketsInfo.xml)
 
 + Request
 
