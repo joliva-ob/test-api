@@ -943,8 +943,7 @@ Use this service to retrive the tickets of a given order, bear in mind the order
 
 ### Get the tickets information [GET]
 
-Use this service to retrive the tickets of a given order, bear in mind the order must be already confirmed. The tickets generation are processed asynchronously, in the meantime the tickets are not available, an http error code (1088) will be returned, hence you will have to retry it until get an http 200 status code.
-**Notice** that we strongly reccommend you to set a delay time of 1 second at least between each call and never keep sending requests after 30 seconds of polling, thank you.
+Use this service to retrive the most relevant information you would need in order to let you creat your own tickets Pdf.
 
 [XML sample response](http://developer.oneboxtickets.com/api-support/order-ticketsInfo.xml)
 
