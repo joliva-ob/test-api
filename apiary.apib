@@ -35,7 +35,7 @@ The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authen
 # Group Contents and Availability
 Group of all contents and availability.
 
-## Product Catalogue [/events/search{?eventType,startDate,endDate,venueId}]
+## Product Catalogue [/events/search{?eventType,startDate,endDate,venueId,taxonomy,propTaxonomy,tourId,visitorType,attrFilter}]
 
 + Attributes (EventsSearchResponseType)
 
@@ -58,9 +58,18 @@ Use this service to search for events and activities with active performances av
         + Members
             + `EVENT` (string) - Filter results to regular events (ie: theater, music, futball)
             + `ACTIVITY` (string) - Filter results to activities (ie: theme parks)
+    + visitorType: `INDIVIDUAL` (enum[string], optional) ... Filter by visitor Type.
+        + Members
+            + `INDIVIDUAL` (string)
+            + `VISITOR_GROUPS` (string)
+            + `MIXED` (string)
     + startDate: `2015-09-01T12:00:00+01:00` (string, optional) ... Filter by session/performance with its start date greater or equals to the given startDate.
     + endDate: `2015-10-01T12:00:00+01:00` (string, optional) ... Filter by session/performance with its end date lower or equals to the given endDate.
     + venueId (string, optional) ... Filter events with active sessions/performances by the given venue id.
+    + taxonomy: 3 (number, optional) ... Filter by taxonomy identifier.
+    + propTaxonomy: 2 (number, optional) ... propTaxonomy.
+    + tourId: 1 (number, optional) ... Tour identifier.
+    + attrFilter: 10, 20 (AttributesFilter, optional) ... Filter by attributes values to apply as filter.
 
 + Response 200 (application/json;charset=UTF-8)
 
@@ -1351,6 +1360,13 @@ Use this service to retrive the tickets of a given order, bear in mind the order
 
 ## EventsSearchResponseType
 + `events-search` (EventsSearchType)
+
+## AttributeFilter
++ @idAttribute: 3 (number)
++ idValue: 1, 2 (array[number])
+
+## AttributesFilter
++ attribute-filter (array[AttributeFilter], fixed-type, required)
 
 ## RestrictionsType
 + packItems (number)
