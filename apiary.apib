@@ -989,6 +989,50 @@ Use this service to obtains the order details and ticket data.
 # Group 4. Tickets
 This group contains all the related services and resources to generate tickets or to get its information to let the client make it at their end.
 
+## TicketsInfo [/order/ticketsInfo{?format,items,orderCode}]
+
++ Attributes (OrderTicketsInfoResponseType)
+
+### Get Info The Tickets [GET]
+
+Use this service to obtain ticket's information, bear in mind the order must be already confirmed.This contains information about barcodes, images, session, event, passengers, etc.
+
+[XML sample response](http://developer.oneboxtickets.com/api-support/order-Info.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + format: `PDF` (string,optional) ... ticket format .
+    + items: 115453625, 115453626, 115453627 (array[number], optional) ... List of product IDs. All product IDs are selected if not specified.
+    + orderCode: 6164E72T7HN1 (string, required) ...order code associated to ticket.
+
++ Response 200 (application/json;charset=UTF-8)
+
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+    + Body
+    + Attributes (OrderTicketsInfoType)
+
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
 ## Tickets PDF [/order/ticketsPDF{?orderCode,items,includeReceipt,merged}]
 
 + Attributes (OrderTicketsPDFResponseType)
@@ -2267,6 +2311,52 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## OrderTicketsPDFResponseType
 + `order-tickets-pdf` (OrderTicketsPDFType)
+
+## TicketInfoType
++ banner1 (ImageType)
++ banner2 (ImageType)
++ banner3 (ImageType)
++ body (ImageType)
++ header (ImageType)
++ logo (ImageType)
++ title (string)
++ subtitle (string)
++ terms (string)
++ additionalInfo (string)
+
+## ItemTicketInfoType
++ Include OrderItemType
++ ticketInfo (TicketInfoType)
+
+## OrderTicketsInfoType
++ client (CustomerType, required)
++ itemTicketInfo (array[ItemTicketInfoType],required)
++ deliveryMethod (number)
++ insurance (InsuranceType,required)
++ priceBreakdown (PriceBreakdownType)
++ payments (PaymentsType)
++ toBePaid (number,required)
++ pending (number,required)
++ channel (ChannelType,required)
++ orderDate (string,required) - XmlGregorianCalendar representation of the given date.
++ currency (string,required)
++ orderCode (string,required)
++ status: `PAID` (enum[string])
+    + Members
+        + `PRE_ORDER` (string)
+        + `CONFIRMED` (string)
+        + `PAID` (string)
+        + `CANCELLED` (string)
+        + `EXPIRED` (string)
++ type: `EXPIRED` (enum[string])
+    + Members
+        + `PURCHASE` (string)
+        + `BOOKING` (string)
+        + `ISSUE` (string)
+        + `REFUND` (string)
+
+## OrderTicketsInfoResponseType
++ `order-tikcets-info` OrderTicketsInfoType
 
 ## OrderDetailsResponseType
 + `oder-details` (OrderDetailsType)
