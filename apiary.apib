@@ -943,6 +943,49 @@ Use this service to definetly commit an order, notice that the availability can'
     + Body
     + Attributes (Error500ResponseType)
 
+## Get Details Order [/order/details{?orderCode,barcode}]
+
++ Attributes (OrderDetailsResponseType)
+
+### Obtain details for a order [GET]
+
+Use this service to obtains the order details and ticket data.
+
+[XML sample response](http://developer.oneboxtickets.com/api-support/order-details.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + orderCode: `23HDKASDFJAS224` (string, required) ... Order code.
+    + barcode: `1234` (string, optional) ... barcode included in the order
+
++ Response 200 (application/json;charset=UTF-8)
+
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+    + Body
+    + Attributes (OrderTicketsPDFType)
+
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
 # Group 4. Tickets
 This group contains all the related services and resources to generate tickets or to get its information to let the client make it at their end.
 
@@ -2314,3 +2357,6 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## OrderTicketsInfoResponseType
 + `order-tikcets-info` OrderTicketsInfoType
+
+## OrderDetailsResponseType
++ `oder-details` (OrderDetailsType)
