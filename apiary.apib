@@ -277,7 +277,7 @@ This will return a token id as a unique identifier.
 ### Add numbered seats [POST]
 
 Use this service to add the desired seats to the shopping cart. The already added seats will be no longer available for any other buyer until those will be released, or the shopping cart expires. It's necessary to call session/{sessionId}/seatMap/view/{viewId} and session/{sessionId}/seatStatus/{viewId} previosly in order to obtain the seats ids and statuses.
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addSeats.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addSeats.xml)
 
 + Request
 
@@ -315,7 +315,7 @@ Use this service to add the desired seats to the shopping cart. The already adde
 ### Add best seats automatically [POST]
 
 Use this service to add the best seats available to the shopping cart. The added seats will be no longer available for any other buyer until those will be released, or the shopping cart expires. The [Optional] parameters filters the available seats which fits with the request as better as possible.
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addBestSeats.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addBestSeats.xml)
 
 + Request
 
@@ -406,7 +406,7 @@ Use this service to add individual activity seats to an existing shopping cart i
 
 Use this service to retrieve all the promotions and discounts available for each item from a shopping cart.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-availablePromotionsAndDiscounts.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-availablePromotionsAndDiscounts.xml)
 
 + Request
 
@@ -449,7 +449,7 @@ Use this service to retrieve all the promotions and discounts available for each
 
 Use this service to retrieve the available promotional offer codes where the promotional code is applicable for.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-promotionalCodeGroup.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-promotionalCodeGroup.xml)
 
 + Request
 
@@ -494,7 +494,7 @@ Use this service to retrieve the available promotional offer codes where the pro
 
 Use this service to apply a discount to one or more seats. Take into account a discount would need a minimum number of seats to be appliable.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addDiscount.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addDiscount.xml)
 
 + Request
 
@@ -541,7 +541,7 @@ Use this service to apply a discount to one or more seats. Take into account a d
 
 Use this service to apply a promotion to one or more seats. Take into account that a promotion would need a minimum number of seats to be appliable.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-addPromotion.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addPromotion.xml)
 
 + Request
 
@@ -588,7 +588,7 @@ Use this service to apply a promotion to one or more seats. Take into account th
 
 Use this service to release an already applied discount from the given seats.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-releaseDiscount.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-releaseDiscount.xml)
 
 + Request
 
@@ -634,7 +634,7 @@ Use this service to release an already applied discount from the given seats.
 
 Use this service to release an already applied promotion from the given seats.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-releasePromotion.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-releasePromotion.xml)
 
 + Request
 
@@ -794,7 +794,7 @@ Use this service to add sets of delivery method and the costs per item and costs
 
 Use this service to release the seats from the shopping cart and makes it available for anyone.
 
-[XML Response](http://developer.oneboxtickets.com/api-support/shoppingCart-releaseItems.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-releaseItems.xml)
 
 + Request
 
@@ -974,50 +974,6 @@ Use this service to obtains the order details and ticket data.
 # Group 4. Tickets
 This group contains all the related services and resources to generate tickets or to get its information to let the client make it at their end.
 
-## TicketsInfo [/order/ticketsInfo{?format,items,orderCode}]
-
-+ Attributes (OrderTicketsInfoResponseType)
-
-### Get Info The Tickets [GET]
-
-Use this service to obtain ticket's information, bear in mind the order must be already confirmed.This contains information about barcodes, images, session, event, passengers, etc.
-
-[XML sample response](http://developer.oneboxtickets.com/api-support/order-Info.xml)
-
-+ Request
-
-  + Headers
-
-            Authorization: Bearer [ACCESS_TOKEN]
-            Content-Type: application/json
-            Accept: application/json
-
-+ Parameters
-    + format: `PDF` (string,optional) ... ticket format .
-    + items: 115453625, 115453626, 115453627 (array[number], optional) ... List of product IDs. All product IDs are selected if not specified.
-    + orderCode: 6164E72T7HN1 (string, required) ...order code associated to ticket.
-
-+ Response 200 (application/json;charset=UTF-8)
-
-            + Headers
-                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
-
-    + Body
-    + Attributes (OrderTicketsInfoType)
-
-+ Response 400 (application/json;charset=UTF-8)
-    + Body
-    + Attributes (Error400ResponseType)
-
-+ Response 401 (application/json;charset=UTF-8)
-    + Body
-    + Attributes (Error401ResponseType)
-
-+ Response 500 (application/json;charset=UTF-8)
-    + Body
-    + Attributes (Error500ResponseType)
-
 ## Tickets PDF [/order/ticketsPDF{?orderCode,items,includeReceipt,merged}]
 
 + Attributes (OrderTicketsPDFResponseType)
@@ -1063,6 +1019,7 @@ Use this service to retrive the tickets of a given order, bear in mind the order
 + Response 500 (application/json;charset=UTF-8)
     + Body
     + Attributes (Error500ResponseType)
+
 
 ## Tickets Information [/order/ticketsInfo{?orderCode,items,includeReceipt,merged}]
 
@@ -2340,8 +2297,5 @@ Use this service to retrive the most relevant information you would need in orde
         + `ISSUE` (string)
         + `REFUND` (string)
 
-## OrderTicketsInfoResponseType
-+ `order-tikcets-info` OrderTicketsInfoType
-
 ## OrderDetailsResponseType
-+ `oder-details` (OrderDetailsType)
++ `order-details` (OrderDetailsType)
