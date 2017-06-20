@@ -188,7 +188,8 @@ Use this service to get session/performance availability and information details
 
 ### Get Root View of Seat Map for a session [GET]
 
-Use this service to get session/performance availability and information details.
+Use this service to get the graphical elements of the principal view of session venue (svg background image, numbered seats,
+     * not numbered zones, links to secondary views
 
 [XML sample response](http://developer.oneboxtickets.com/api-support/seatMap-root-view.xml)
 
@@ -203,6 +204,49 @@ Use this service to get session/performance availability and information details
 + Parameters
     + idSession: 132177 (number, required) ... Session identifier
 
+
++ Response 200 (application/json;charset=UTF-8)
+
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+    + Body
+    + Attributes (SeatMapType)
+
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
+## View Info by Session [/session/{idSession}/seatMap/view/{idView}]
+
++ Attributes (SeatMapViewResponseType)
+
+### Get graphical principal view of session venue[GET]
+
+Use this service to get the graphical elements of the principal view of session venue (svg background image, numbered seats, not numbered zones, links to other views)
+
+[XML sample response](http://developer.oneboxtickets.com/api-support/session-seatMapView.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + idSession: 12345 (number, required) ... Session identifier
+    + idView: 12 (number, required) ... View identifier
 
 + Response 200 (application/json;charset=UTF-8)
 
@@ -1635,7 +1679,7 @@ Use this service to retrive the most relevant information you would need in orde
 + productId: 123 (number)
 + discount (DiscountType)
 + discountActivator: `aaa` (string)
-+ price-breakdown (PriceBreakdownType)
++ `price-breakdown` (PriceBreakdownType)
 + operationsAllowed (OperationsOrderAllowedType)
 + attendant (AttendantType)
 + itemWarning: `SESSION_NON_CONSECUTIVE_SEAT` (array[enum])
@@ -1647,7 +1691,7 @@ Use this service to retrive the most relevant information you would need in orde
             + `SESSION_NON_CONSECUTIVE_ZNN` (string)
             + `SESSION_NON_CONSECUTIVE_SEAT_ZNN` (string)
 + modifyingBookingOrderCode: `aaa` (string)
-+ clientConiditions (ClientConditionsType)
++ clientConditions (ClientConditionsType)
 + @id: 123 (number,required)
 + @type: `TICKET` (enum)
     ++ (enum[string])
@@ -1660,12 +1704,12 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## ShoppingCartType
 + client (CustomerType, required)
-+ shoppingCartItem (array[shoppingCartItemType],required)
++ `shopping-cart-item` (array[shoppingCartItemType],required)
 + deliveryMethod: 1 (number)
 + deliveryCosts: 1.0 (number)
 + insurance (InsuranceType)
 + visitorGroup (array[VisitorGroupType],required)
-+ totalPriceBreakdown (PriceBreakdownType,required)
++ `total-price-breakdown` (PriceBreakdownType,required)
 + platformClient (PlatformClientType,required)
 + @token: `aaaf8asdf6afasdfhas` (string, required)
 + @currency: `EUR` (string, required)
@@ -2381,3 +2425,6 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## SeatMapRootViewResponseType
 + `seat-map-root-view` (SeatMapType)
+
+## SeatMapViewResponseType
++ `seat-map-view` (SeatMapType)
