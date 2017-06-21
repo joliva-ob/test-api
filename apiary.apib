@@ -191,7 +191,7 @@ Use this service to get session/performance availability and information details
 Use this service to get the graphical elements of the principal view of session venue (svg background image, numbered seats,
      * not numbered zones, links to secondary views
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/seatMap-root-view.xml)
+[XML sample response](http://developer.oneboxtickets.com/api-support/session-seatMapRootView.xml)
 
 + Request
 
@@ -245,8 +245,8 @@ Use this service to get the graphical elements of the principal view of session 
             Accept: application/json
 
 + Parameters
-    + idSession: 12345 (number, required) ... Session identifier
-    + idView: 12 (number, required) ... View identifier
+    + idSession: 132177 (number, required) ... Session identifier
+    + idView: 131545 (number, required) ... View identifier
 
 + Response 200 (application/json;charset=UTF-8)
 
@@ -268,6 +268,50 @@ Use this service to get the graphical elements of the principal view of session 
 + Response 500 (application/json;charset=UTF-8)
     + Body
     + Attributes (Error500ResponseType)
+
+## Status View by Session [/session/{idSession}/seatStatus/{idView}]
+
++ Attributes (SessionSeatStatusResponseType)
+
+### Get status seat session info [GET]
+
+Gets the status of all numbered seats, not numbered zones and links to other views for target view
+
+[XML sample response](http://developer.oneboxtickets.com/api-support/session-seatStatusView.xml)
+
++ Request
+
+  + Headers
+
+            Authorization: Bearer [ACCESS_TOKEN]
+            Content-Type: application/json
+            Accept: application/json
+
++ Parameters
+    + idSession: 132177 (number, required) ... Session identifier
+    + idView: 131545 (number, required) ... View identifier
+
++ Response 200 (application/json;charset=UTF-8)
+
+            + Headers
+                traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+
+    + Body
+    + Attributes (MapStatusType)
+
++ Response 400 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error400ResponseType)
+
++ Response 401 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error401ResponseType)
+
++ Response 500 (application/json;charset=UTF-8)
+    + Body
+    + Attributes (Error500ResponseType)
+
 
 # Group 2. Shopping Cart
 This group contains all the related services and resources to let you manage a shopping basket (add/release product items).
@@ -2428,3 +2472,58 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## SeatMapViewResponseType
 + `seat-map-view` (SeatMapType)
+
+## SeatStatusType
++ @id: 123 (number, required)
++ @sessionId: 132177 (number, required)
++ @status: 1 (number, required)
++ @blockingReasonId: 123 (number, required)
++ @priceZoneId: 3 (number, required)
+
+## SeatsStatusType
++ seatStatus (array[SeatStatusType], required)
+
+## NotNumberedAreaStatusType
++ @id: 123 (number, required)
++ @sessionId: 123 (number, required)
++ @priceZoneId: 123 (number, required)
++ `availability-info` (AvailabilityInfoType, required)
+
+## NotNumberedAreasStatusType
++ notNumberedAreasStatusType (array[NotNumberedAreaStatusType], fixed-type, required)
+
+## PriceZoneStatusType
++ @id: 123 (number, required)
++ availabilityInfo (AvailabilityInfoType, required)
++ `sector-availability` (array[SectorAvailabilityType], fixed-type, required)
+
+## PriceZonesStatusType
++ `price-zones-status` (array[PriceZoneStatusType], fixed-type, required)
+
+## LinkStatusType
++ @id: 123 (number, required)
++ `price-zones-status` (PriceZonesStatusType, required)
+
+## LinksStatusType
++ linkStatus (array[LinkStatusType], fixed-type, required)
+
+## StatusType
++ seatsStatus (SeatsStatusType, required)
++ notNumberedAreasStatus (NotNumberedAreasStatusType, required)
++ linksStatus (LinksStatusType, required)
++ viewMaxAvailableConsecutivesNumberedSeats: 5 (number, required)
+
+## ViewStatusType
++ @id: 123 (number, required)
++ status (StatusType, required)
++ `price-zones-status` (PriceZonesStatusType, required)
++ sector (array[SectorType], fixed-type, required)
+
+## MapStatusType
++ viewStatus (ViewStatusType, required)
+
+## SessionSeatStatusType
++ Include MapStatusType
+
+## SessionSeatStatusResponseType
++ `session-seat-status` (SessionSeatStatusType)
