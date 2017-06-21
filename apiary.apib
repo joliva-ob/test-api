@@ -182,7 +182,7 @@ Use this service to get session/performance availability and information details
     + Body
     + Attributes (Error500ResponseType)
 
-## Session Root View of Seat Map [/session/{idSession}/seatMap/rootView]
+## Session Root View [/session/{idSession}/seatMap/rootView]
 
 + Attributes (SeatMapRootViewResponseType)
 
@@ -211,7 +211,7 @@ Use this service to get session/performance availability and information details
                 OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
 
     + Body
-    + Attributes (SessionInfoType)
+    + Attributes (SeatMapType)
 
 + Response 400 (application/json;charset=UTF-8)
     + Body
@@ -224,7 +224,6 @@ Use this service to get session/performance availability and information details
 + Response 500 (application/json;charset=UTF-8)
     + Body
     + Attributes (Error500ResponseType)
-
 
 # Group 2. Shopping Cart
 This group contains all the related services and resources to let you manage a shopping basket (add/release product items).
@@ -855,7 +854,7 @@ Use this service to create a new order from a given shopping cart token id. This
     + items: 123 (array[number], optional) ... Items identifiers. If not present, all items will be added.
     + itemsChannelCharges (ItemsChannelChargesType, optional) ... Items channel charges, for external charges.
     + notes: `A note` (string, optional) ... Client additional info.
-    + skipClientValidations: false (boolean, optional) ... Indicate if skip client validations. False by default if not specified.
+    + skipClientValidations (boolean, optional) ... Indicate if skip client validations. False by default if not specified.
 
 + Response 200 (application/json;charset=UTF-8)
 
@@ -1105,18 +1104,18 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## TaxonomyType
 + @id: 68 (number, required) - Unique identifier of this product segmentation.
-+ code: `APRTEM` (string, required) - Unique identifier fo this product segmentation to be used in th API.
++ code: APRTEM (string, required) - Unique identifier fo this product segmentation to be used in th API.
 + description: `Theme Parks` (string, optional) - Short description to better understand the taxonomy segmentation.
 
 ## ChildTaxonomyType
 + @id: 68 (number, required) - Unique identifier of this product segmentation.
-+ code: `APRTEM` (string, required) - Unique identifier fo this product segmentation to be used in th API.
++ code: APRTEM (string, required) - Unique identifier fo this product segmentation to be used in th API.
 + description: `Theme Parks` (string, optional) - Short description to better understand the taxonomy segmentation.
 + `superior-taxonomy` (TaxonomyType)
 
 ## CustomTaxonomyType
 + @id: 68 (number, required) - Unique identifier of this product segmentation.
-+ code: `APRTEM` (string, required) - Unique identifier fo this product segmentation to be used in th API.
++ code: APRTEM (string, required) - Unique identifier fo this product segmentation to be used in th API.
 + description: `Theme Parks` (string, optional) - Short description to better understand the taxonomy segmentation.
 
 ## LanguageType
@@ -1167,7 +1166,7 @@ Use this service to retrive the most relevant information you would need in orde
 + postalCode: `SD-4324` (string, required) - Postal code or zip code where the event will be performed.
 + countrySubdivision (CountrySubdivisionType, required) - `Country subdivision, this shall be the province, state or county. Ie: ES-T - Tarragona.`
 + country (CountryType, required) - `Ie: ES - Spain.`
-+ coordinates: `aaa` (string, optional)
++ coordinates (string, optional)
 
 ## EntityType
 + @id: 123 (number, required)
@@ -1197,8 +1196,8 @@ Use this service to retrive the most relevant information you would need in orde
 + referenceCode: `OB` (string, required)
 
 ## AttributeInfoType
-+ id: 1 (number, required) - Unique identifier.
-+ name: `aaa` (string, required)
++ id (number, required) - Unique identifier.
++ name (string, required)
 + selection: `SINGLE` (enum[string], required)
     + Members
         + `SINGLE` (string)
@@ -1218,7 +1217,7 @@ Use this service to retrive the most relevant information you would need in orde
 + referenceCode: `Attr` (string, required)
 
 ## DomainValueType
-+ value: `oneboxtm` (string, required)
++ value: `` (string, required)
 + idValue: 30 (number)
 
 ## AttributeValueType
@@ -1233,8 +1232,8 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## PassbookPreferencesType
 + `communication-elements` (CommunicationElementsType)
-+ textColor: `aaa` (string, optional)
-+ labelColor: `aaa` (string, optional)
++ textColor (string, optional)
++ labelColor (string, optional)
 + backgroundColor(string, optional)
 
 ## ClientEventDiscountType
@@ -1252,8 +1251,8 @@ Use this service to retrive the most relevant information you would need in orde
 + subtitle: `¡Discover the 6 worlds adrenaline!` (string, required) - Event secondary title
 + shortDescription: `<P ALIGN=\"LEFT\">Six amazing worlds in just one Park, perfect for having fun in family and frends as well.</P>`(string, required) - Event short description
 + longDescription: `<P ALIGN=\"LEFT\">Explore a whole world of fun and know our amazing theme parks. An ideal destination for a family getaway, located in one of the best tourist areas of Spain and just an hour from Barcelona! </ P> <BR/> <P ALIGN = \ "LEFT \"> The best entertainment, relaxation, gastronomy and shopping you can imagine. > A DESTINY AND SIX WORLDS TO DISCOVER </ P> <P ALIGN = \ "LEFT \"> Here begins a journey that takes you much further than you can imagine. At the Park we look forward to six fascinating worlds completely different, with a careful decoration to the last detail, so that you enjoy to the maximum. Emotions for all tastes. Families, friends, big and small: in our theme park, all the fun.</P>` (string, required) - Event detailed description
-+ additionalEventData: `aaa` (string, required)
-+ duration: `aaa` (string, required)
++ additionalEventData (string, required)
++ duration (string, required)
 + `communication-elements` (CommunicationElementsType)
 + taxonomy (ChildTaxonomyType)
 + `custom-taxonomy` (CustomTaxonomyType)
@@ -1284,7 +1283,7 @@ Use this service to retrive the most relevant information you would need in orde
 + location (LocationType)
 
 ## SpaceType
-+ @id: 150 (number) - Unique space identifier.
++ id: 150 (number) - Unique space identifier.
 + name: `SPACE` (string) - Space name.
 
 ## SessionBaseFixedType
@@ -1446,11 +1445,11 @@ Use this service to retrive the most relevant information you would need in orde
 + priceZoneAvailability (array[PriceZoneAvailabilityType], fixed-type, required)
 
 ## SessionMinPriceType
-+ price: 1.0 (number, required)
++ price: 0 (number, required)
 + charges (ChargesType)
 
 ## SessionMaxPriceType
-+ price: 10.0 (number, required)
++ price: 10 (number, required)
 + charges (ChargesType)
 
 ## VisitorGroupAvailabilityType
@@ -1475,11 +1474,11 @@ Use this service to retrive the most relevant information you would need in orde
 + `session-search-info`(array[SessionSearchInfoType], fixed-type)
 
 ## EventMinPriceType
-+ price: 1.0 (number, required)
++ price: 0 (number, required)
 + charges (ChargesType)
 
 ## EventMaxPriceType
-+ price: 10.0 (number, required)
++ price: 10 (number, required)
 + charges (ChargesType)
 
 ## EventSearchInfoType
@@ -1555,8 +1554,8 @@ Use this service to retrive the most relevant information you would need in orde
 + purchaseTicketsLimit: 1 (number, optional) - Ticket purchase limit.
 + antibotDesired: false (boolean, optional)
 + showTime: true (boolean, optional) - Default true
-+ capacityIdAvet: `aaa` (string, optional)
-+ sessionIdAvet: `aaa` (string, optional)
++ capacityIdAvet (string, optional)
++ sessionIdAvet (string, optional)
 
 ## SessionInfoType
 + Include SessionBaseType
@@ -1661,11 +1660,11 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## ShoppingCartType
 + client (CustomerType, required)
-+ shoppingCartItem (array[shoppingCartItemType],fixed-type,required)
++ shoppingCartItem (array[shoppingCartItemType],required)
 + deliveryMethod (number)
 + deliveryCosts (number)
 + insurance (InsuranceType)
-+ visitorGroup (array[VisitorGroupType],fixed-type,required)
++ visitorGroup (array[VisitorGroupType],required)
 + totalPriceBreakdown (PriceBreakdownType,required)
 + platformClient (PlatformClientType,required)
 + @token (string, required)
@@ -1725,7 +1724,7 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## ShoppingCartAvailableSalesType
 + @currency: `EUR` (string, required)
-+ @timeLeft: 599 (number, required)
++ @timeLeft (number, required)
 + @token: `188a5cf2a844e684375172cb1cf2bbf3` (string, required)
 + `shopping-cart-item-sales` (shoppingCartItemSalesType, required)
 
@@ -1777,12 +1776,12 @@ Use this service to retrive the most relevant information you would need in orde
 + itemChannelCharges (array[ItemChannelChargesType], fixed-type, required)
 
 ## IdentificationType
-+ value: `aaa` (string, required)
-+ @type: `TYPE` (string, required)
++ value (string, required)
++ @type (string, required)
 
 ## ProfileFieldType
 + @`field-id`: 123 (number, required) - Unique profile field identifier.
-+ idValue (array[number], optional)
++ idValue (array[number], fixed-type, optional)
 + `user-input-value` (array[object], fixed-type, optional)
 
 ## ProfileDataType
@@ -1794,12 +1793,12 @@ Use this service to retrive the most relevant information you would need in orde
 + @code (string, required)
 
 ## ExternalPropertiesType
-+ externalId: `ID` (string, optional)
++ externalId (string, optional)
 
 ## GroupValidationType
 + @idGroup: 123 (number, required) - Unique group validation identifier.
-+ user: `a@a.com` (string, required)
-+ promotionalCode: `CODE` (string, required)
++ user (string, required)
++ promotionalCode (string, required)
 + externalProperties (ExternalPropertiesType)
 
 ## CustomerType
@@ -1818,8 +1817,8 @@ Use this service to retrive the most relevant information you would need in orde
         + `MALE` (string)
         + `FEMALE` (string)
 + location (LocationType, required)
-+ idCard: 'ID' (string, optional)
-+ docType: 1 (number, optional)
++ idCard (string, optional)
++ docType (number, optional)
 + `profile-data` (ProfileDataType)
 + language (CustomerTypeLanguageType)
 + groupValidation (array[GroupValidationType], fixed-type)
@@ -1849,13 +1848,13 @@ Use this service to retrive the most relevant information you would need in orde
 + zone (string)
 
 ## TicketDataType
-+ notNumberedAreaName: ´Adult entry´ (string)
-+ numSeat: 1 (string)
-+ rowName: `aa` (string)
-+ sectorName: `Unique Entry` (string)
-+ printouts: 1 (number)
-+ cancellations: 0 (number)
-+ barcode: `aff8s9fw9s7s8s9s87s7s` (string)
++ notNumberedAreaName (string)
++ numSeat (string)
++ rowName (string)
++ sectorName (string)
++ printouts (number)
++ cancellations (number)
++ barcode (string)
 + status: `PURCHASED` (enum[string])
     + Members
         + `PURCHASED` (string)
@@ -1877,17 +1876,17 @@ Use this service to retrive the most relevant information you would need in orde
 + `automatic-promotion` (OrderAutomaticPromotionType)
 + promotion (OrderPromotionType)
 + discount (OrderDiscountType)
-+ viewId: 123 (number)
-+ notNumberedAreaId: 123 (number)
-+ sectorId: 123 (number)
-+ priceZoneId: 123 (number)
-+ access: `aaa` (string)
-+ idTicketActivityType: 123 (number)
-+ nameTicketActivityType: `adult` (string)
++ viewId (number)
++ notNumberedAreaId (number)
++ sectorId (number)
++ priceZoneId (number)
++ access (string)
++ idTicketActivityType (number)
++ nameTicketActivityType (string)
 + externalData (ExternalTicketDataType)
-+ idVisitorGroup: 123 (number)
-+ visitorGroupNumAttendantsVariation: 123 (number)
-+ visitorGroupNumAccompanistsVariation: 123 (number)
++ idVisitorGroup (number)
++ visitorGroupNumAttendantsVariation (number)
++ visitorGroupNumAccompanistsVariation (number)
 + @seatType: `NUMBERED` (enum[string], required)
     + Members
         + `NUMBERED` (string)
@@ -1898,27 +1897,27 @@ Use this service to retrive the most relevant information you would need in orde
         + `INVITATION` (string)
 
 ## CatalogInfoType
-+ entityId: 123 (number)
-+ name: `aaa` (string, required)
++ entityId (number)
++ name (string, required)
 
 ## AttributeType
 + @id: 10 (number, required) - Unique attribute identifier.
-+ name: `aaa` (string, required)
++ name (string, required)
 
 ## AttributesType
 + attribute (array[AttributeType], fixed-type, required)
 
 ## ProductInfoFixedType
 + @id: 10 (number, required) - Unique product identifier.
-+ internalName: `aaa` (string, required)
-+ name: `aaa` (string, required)
++ internalName (string, required)
++ name (string, required)
 + dates (DatesType)
 + venue (VenueType, required)
 + `catalog-info` (CatalogInfoType, required)
 + attributes (AttributesType, required)
 + `product-image` (array[object], fixed-type, required)
-+ forSale: true (boolean)
-+ bookable: true (boolean)
++ forSale (boolean)
++ bookable (boolean)
 
 ## ProductInfoNoLoopType
 + Include ProductInfoFixedType
@@ -1933,20 +1932,20 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## PriceBreakdownType
 + `base-price`: 10.00 (number, required)
-+ `automatic-promotion`: 123 (number)
-+ `manual-promotion`: 123 (number)
-+ `manual-discount`: 123 (number)
-+ `client-discount`: 123 (number)
-+ `client-comission`: 123 (number)
++ `automatic-promotion` (number)
++ `manual-promotion` (number)
++ `manual-discount` (number)
++ `client-discount` (number)
++ `client-comission` (number)
 + charges (ChargesType)
 + `delivery-costs` (number)
-+ insurance: 123 (number)
++ insurance (number)
 + taxes (TaxesType)
 + `final-price`: 20.00 (number, required)
 
 ## VariantAttributeType
 + attribute (AttributeType, required)
-+ value: `aaaa` (string, required)
++ value (string, required)
 
 ## VariantAttributesType
 + `variant-attribute` (array[VariantAttributeType], fixed-type, required)
@@ -1955,8 +1954,8 @@ Use this service to retrive the most relevant information you would need in orde
 + id: 10 (number, required) - Unique product variant identifier.
 + sku (string)
 + `price-breakdown` (PriceBreakdownType, required)
-+ `limited-stock`: false (boolean)
-+ `variant-availability`: 123 (number)
++ `limited-stock` (boolean)
++ `variant-availability` (number)
 + `variant-attributes` (VariantAttributesType)
 + venue (VenueType, required)
 + `catalog-info` (CatalogInfoType, required)
@@ -1992,18 +1991,18 @@ Use this service to retrive the most relevant information you would need in orde
         + `INVITATION` (string)
 
 ## FieldType
-+ @name: `aaa` (string, required)
-+ @value: `aaa` (string, required)
++ @name (string, required)
++ @value (string, required)
 
 ## ClientDiscountType
-+ @value: 123 (number, required)
++ @value (number, required)
 + type: `PERCENT` (enum[string], required)
     + Members
         + `AMOUNT` (string)
         + `PERCENT` (string)
 
 ## ClientCommissionType
-+ @value: 123 (number, required)
++ @value (number, required)
 + type: `PERCENT` (enum[string], required)
     + Members
         + `AMOUNT` (string)
@@ -2034,7 +2033,7 @@ Use this service to retrive the most relevant information you would need in orde
         + `EXPIRED` (string)
 + $: `2015-09-01T12:00:00+01:00` (string, optional)
 + operationsAllowed (OperationsOrderAllowedType)
-+ productId: 123 (number, optional)
++ productId (number, optional)
 + itemWarning: `SESSION_NON_CONSECUTIVE_SEAT` (array[enum])
     + (enum[string])
         + Members
@@ -2045,8 +2044,8 @@ Use this service to retrive the most relevant information you would need in orde
             + `SESSION_NON_CONSECUTIVE_SEAT_ZNN` (string)
 + attendant (AttendantType)
 + clientConditions (ClientConditionsType)
-+ @relatedRefundOrderCode: `aaa` (string)
-+ @relatedBookingIssueOrderCode: `aaa` (string)
++ @relatedRefundOrderCode (string)
++ @relatedBookingIssueOrderCode (string)
 + @relatedBookingIssueOrderType: `PURCHASE` (enum[string])
     + Members
         + `PURCHASE` (string)
@@ -2057,11 +2056,11 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## InsuranceType
 + @id: 123 (number, required) - Unique insurance identifier.
-+ name: `aaa` (string, required)
-+ description: `aaa` (string, required)
-+ privacyPolicy: `aaa` (string, required)
-+ termsOfUse: `aaa` (string, required)
-+ additionalData: `aaa` (string, required)
++ name (string, required)
++ description (string, required)
++ privacyPolicy (string, required)
++ termsOfUse (string, required)
++ additionalData (string, required)
 
 ## OrderPaymentType
 + id: 123 (number, required) - Unique payment identifier.
@@ -2072,10 +2071,10 @@ Use this service to retrive the most relevant information you would need in orde
         + `BANK_TRANSFER` (string)
         + `OTHER` (string)
         + `CLIENT_BALANCE` (string)
-+ value: 112 (number, required)
-+ externalReference: `aaa` (string)
-+ isAdvance: false (boolean)
-+ lastCreditCardDigits: `123` (string)
++ value (number, required)
++ externalReference (string)
++ isAdvance (boolean)
++ lastCreditCardDigits (string)
 + creditCardType: `MASTERCARD` (enum[string])
     + Members
         + `MASTERCARD` (string)
@@ -2091,7 +2090,7 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## ChannelType
 + @id: 123 (number, required) - Unique channel identifier.
-+ name: `channelName` (string, required)
++ name (string, required)
 + type: `PORTAL` (enum[string], required)
     + Members
         + `BOXOFFICE` (string)
@@ -2105,34 +2104,34 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## VisitorGroupType
 + @id: 123 (number, required) - Unique visitor group identifier.
-+ name: `visitor` (string, required)
-+ numAttendants: 1 (number)
-+ numAccompanists: 1 (number)
++ name (string, required)
++ numAttendants (number)
++ numAccompanists (number)
 + `attribute-values` (array[AttributeValuesType], fixed-type, required)
 
 ## InvoiceDataType
-+ name: `aaa` (string, required)
-+ fiscalCode: `112fa` (string, required)
++ name (string, required)
++ fiscalCode (string, required)
 + fiscalCodeValidated: true (boolean, required)
-+ address: `address` (string, required)
-+ postalCode: `123421` (string, required)
-+ city: `Barcelona` (string, required)
++ address (string, required)
++ postalCode (string, required)
++ city (string, required)
 + $: `2015-09-01T12:00:00+01:00` (string, required)
-+ language: `es` (string, required)
-+ notes: `aaa` (string, required)
++ language (string, required)
++ notes (string, required)
 
 ## ClientB2BBranchType
 + location (LocationType, required)
-+ contactName: `aaaa` (string, required)
-+ contactEmail: `a@a.com` (string, required)
-+ contactPhone: `999999999` (string, required)
-+ @main: true (boolean, required)
++ contactName (string, required)
++ contactEmail (string, required)
++ contactPhone (string, required)
++ @main (boolean, required)
 
 ## UserType
 + @id: 123 (number, required) - Unique user identifier.
-+ name: 'aaa' (string, required)
-+ email: `a@a.com` (string, required)
-+ username `aaa` (string, required)
++ name (string, required)
++ email (string, required)
++ username (string, required)
 
 ## ClientB2BType
 + businessName (string, required)
@@ -2205,9 +2204,9 @@ Use this service to retrive the most relevant information you would need in orde
         + `OTHER` (string)
         + `CLIENT_BALANCE` (string)
 + value: 100.00 (number, required)
-+ creditCardNumber: `1234 4524 25 2525244444` (string)
-+ merchant: `aaa` (string)
-+ externalReference: `aaaaa` (string)
++ creditCardNumber (string)
++ merchant (string)
++ externalReference (string)
 + creditCardType: `MASTERCARD` (enum[string])
     + Members
         + `MASTERCARD` (string)
@@ -2216,7 +2215,7 @@ Use this service to retrive the most relevant information you would need in orde
         + `AMERICAN_EXPRESS` (string)
         + `OTHER` (string)
 + transferDate: `2015-09-01T12:00:00+01:00` (string, required)
-+ paymentExtraCode: `AAAA` (string)
++ paymentExtraCode (string)
 
 ## PaymentsType
 + payment (array[PaymentType], fixed-type, required)
@@ -2229,21 +2228,21 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## TicketType
 + id (number, required) - Unique identifier of this ticket.
-+ url: `http://aadfadf.pdf` (string)
-+ format: `PDF` (string)
++ url (string)
++ format (string)
 
 ## TicketsType
 + ticket (array[TicketType], required)
 
 ## OrderReceiptType
-+ url: `http://asdaf` (string)
-+ format: `PDF` (string)
++ url (string)
++ format (string)
 
 ## OrderTicketsType
-+ orderCode: `84982VJ33N3H3` (string, required)
++ orderCode (string, required)
 + tickets (TicketsType, required)
 + orderReceipt (OrderReceiptType, required)
-+ mergedTickets: `aaa` (string, required)
++ mergedTickets (string, required)
 
 ## OrderTicketsPDFType
 + Include OrderTicketsType
@@ -2258,10 +2257,10 @@ Use this service to retrive the most relevant information you would need in orde
 + body (ImageType)
 + header (ImageType)
 + logo (ImageType)
-+ title: `aaaa` (string)
-+ subtitle: `aaa` (string)
-+ terms: `aaaa` (string)
-+ additionalInfo: `aaaa` (string)
++ title (string)
++ subtitle (string)
++ terms (string)
++ additionalInfo (string)
 
 ## ItemTicketInfoType
 + Include OrderItemType
@@ -2270,16 +2269,16 @@ Use this service to retrive the most relevant information you would need in orde
 ## OrderTicketsInfoType
 + client (CustomerType, required)
 + itemTicketInfo (array[ItemTicketInfoType],required)
-+ deliveryMethod: 1 (number)
++ deliveryMethod (number)
 + insurance (InsuranceType,required)
 + priceBreakdown (PriceBreakdownType)
 + payments (PaymentsType)
-+ toBePaid: `1.0` (number,required)
-+ pending: `1.0` (number,required)
++ toBePaid (number,required)
++ pending (number,required)
 + channel (ChannelType,required)
-+ orderDate: `2015-09-01T12:00:00+01:00` (string,required) - XmlGregorianCalendar representation of the given date.
-+ currency: `EUR` (string,required)
-+ orderCode: `84982VJ33N3H3` (string,required)
++ orderDate (string,required) - XmlGregorianCalendar representation of the given date.
++ currency (string,required)
++ orderCode (string,required)
 + status: `PAID` (enum[string])
     + Members
         + `PRE_ORDER` (string)
@@ -2317,7 +2316,7 @@ Use this service to retrive the most relevant information you would need in orde
 + sectorId: 123 (number)
 + sectorName: `aaa` (string)
 + name: `aaa` (string)
-+
+
 ## NotNumberedAreasType
 + `notNumberedArea` (array[NotNumberedAreaType],fixed-type,required)
 
@@ -2362,13 +2361,14 @@ Use this service to retrive the most relevant information you would need in orde
 
 ## LinksType
 + links (array[Link],fixed-type)
+
 ## ViewType
 + @id: 123 (number, required)
 + @name: `aaa` (string,required)
 + description: `aaaa` (string,required)
 + root: `true` (boolean)
-+ parentId: `12345` (number, required)
-+ svg: 'http://image.svg' (string)
++ parentId: 12345 (number, required)
++ svg: `http://image.svg` (string)
 + obsvg: `https://image.svg` (string)
 + links (LinksType,required)
 + price-zones (PriceZonesType,required)
