@@ -3,14 +3,14 @@ HOST: http://gateway-pre.oneboxtickets.net/onebox-rest2/rest/
 
 # Ticket distribution API
 
-![Onebox logo](http://developer.oneboxtickets.com/img/Banner-Onebox-Rest-Api-3.png "Onebox API logo")
+![Onebox logo](http://developer.oneboxtm.com/img/Banner-Onebox-Rest-Api-3.png "Onebox API logo")
 
 ## API for ticketing distribution
 There are two API that a client must have to implement in order to perform a complete ticket booking flow in Onebox.
 
 The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authentication.apiary.io)**, this API will let you retrieve an authorization token to be used afterwards to call any service from the distribution API.
 
-![Onebox Oauth2 flow](http://developer.oneboxtickets.com/img/OUTH2-API-diagram-flow.png "Onebox OAuth2 flow")
+![Onebox Oauth2 flow](http://developer.oneboxtm.com/img/OUTH2-API-diagram-flow.png "Onebox OAuth2 flow")
 
 ### 1. Authentication
 
@@ -26,9 +26,9 @@ The first one is the **[Oauth2 Authentiation API](http://docs.oneboxoauth2authen
 6. Confirm the order
 7. Download ticket
 
-![Onebox logo](http://developer.oneboxtickets.com/img/APIFlow.png "API Flow")
+![Onebox logo](http://developer.oneboxtm.com/img/APIFlow.png "API Flow")
 
-**Notice** that you also will be able to search for availability and navigate across numbered venues. Must see the distribution API online documentation: [Onebox Distribution API Documentation](http://developer.oneboxtickets.com)
+**Notice** that you also will be able to search for availability and navigate across numbered venues. Must see the distribution API online documentation: [Onebox Distribution API Documentation](http://developer.oneboxtm.com)
 
 ---
 
@@ -43,7 +43,7 @@ This group contains all the related services and resources about contents like e
 
 Use this service to search for events and activities with active performances available from providers linked to your on sale distribution channel.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/events-search.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/events-search.xml)
 
 + Request
 
@@ -75,7 +75,7 @@ Use this service to search for events and activities with active performances av
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (EventsSearchType)
@@ -101,7 +101,7 @@ Use this service to search for events and activities with active performances av
 
 Use this service to get an event and its performances dates with detailed information.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/event-info.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/event-info.xml)
 
 + Request
 
@@ -121,7 +121,7 @@ Use this service to get an event and its performances dates with detailed inform
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (EventInfoType)
@@ -147,7 +147,7 @@ Use this service to get an event and its performances dates with detailed inform
 
 Use this service to get session/performance availability and information details.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/session-info.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/session-info.xml)
 
 + Request
 
@@ -165,7 +165,7 @@ Use this service to get session/performance availability and information details
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (SessionInfoType)
@@ -191,7 +191,7 @@ Use this service to get session/performance availability and information details
 Use this service to get the graphical elements of the principal view of session venue (svg background image, numbered seats,
      * not numbered zones, links to secondary views
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/session-seatMapRootView.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/session-seatMapRootView.xml)
 
 + Request
 
@@ -209,7 +209,7 @@ Use this service to get the graphical elements of the principal view of session 
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (SeatMapType)
@@ -234,7 +234,7 @@ Use this service to get the graphical elements of the principal view of session 
 
 Use this service to get the graphical elements of the principal view of session venue (svg background image, numbered seats, not numbered zones, links to other views)
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/session-seatMapView.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/session-seatMapView.xml)
 
 + Request
 
@@ -252,7 +252,7 @@ Use this service to get the graphical elements of the principal view of session 
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (SeatMapType)
@@ -277,7 +277,7 @@ Use this service to get the graphical elements of the principal view of session 
 
 Gets the status of all numbered seats, not numbered zones and links to other views for target view
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/session-seatStatusView.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/session-seatStatusView.xml)
 
 + Request
 
@@ -295,7 +295,7 @@ Gets the status of all numbered seats, not numbered zones and links to other vie
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (MapStatusType)
@@ -324,7 +324,7 @@ This group contains all the related services and resources to let you manage a s
 
 This will return a token id as a unique identifier.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-create.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-create.xml)
 
 + Request
 
@@ -337,7 +337,7 @@ This will return a token id as a unique identifier.
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
     + Body
     + Attributes (CreateShoppingCartType)
 
@@ -361,7 +361,7 @@ This will return a token id as a unique identifier.
 ### Add numbered seats [POST]
 
 Use this service to add the desired seats to the shopping cart. The already added seats will be no longer available for any other buyer until those will be released, or the shopping cart expires. It's necessary to call session/{sessionId}/seatMap/view/{viewId} and session/{sessionId}/seatStatus/{viewId} previosly in order to obtain the seats ids and statuses.
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addSeats.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-addSeats.xml)
 
 + Request
 
@@ -378,7 +378,7 @@ Use this service to add the desired seats to the shopping cart. The already adde
 + Response 200 (application/json;charset=UTF-8)
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
     + Body
     + Attributes (ShoppingCartType)
 + Response 400 (application/json;charset=UTF-8)
@@ -399,7 +399,7 @@ Use this service to add the desired seats to the shopping cart. The already adde
 ### Add best seats automatically [POST]
 
 Use this service to add the best seats available to the shopping cart. The added seats will be no longer available for any other buyer until those will be released, or the shopping cart expires. The [Optional] parameters filters the available seats which fits with the request as better as possible.
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addBestSeats.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-addBestSeats.xml)
 
 + Request
 
@@ -423,7 +423,7 @@ Use this service to add the best seats available to the shopping cart. The added
 + Response 200 (application/json;charset=UTF-8)
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
     + Body
     + Attributes (ShoppingCartType)
 + Response 400 (application/json;charset=UTF-8)
@@ -443,7 +443,7 @@ Use this service to add the best seats available to the shopping cart. The added
 
 Use this service to add individual activity seats to an existing shopping cart identified by a token id. The seats will be locked up to 10 minutes.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addIndividualActivitySeats.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-addIndividualActivitySeats.xml)
 
 + Request
 
@@ -464,7 +464,7 @@ Use this service to add individual activity seats to an existing shopping cart i
   + Headers
 
             traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-            OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+            OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (AddIndividualActivitySeatsType)
@@ -490,7 +490,7 @@ Use this service to add individual activity seats to an existing shopping cart i
 
 Use this service to retrieve all the promotions and discounts available for each item from a shopping cart.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-availablePromotionsAndDiscounts.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-availablePromotionsAndDiscounts.xml)
 
 + Request
 
@@ -507,7 +507,7 @@ Use this service to retrieve all the promotions and discounts available for each
 
           + Headers
               traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
   + Body
   + Attributes (ShoppingCartAvailableSalesType)
@@ -533,7 +533,7 @@ Use this service to retrieve all the promotions and discounts available for each
 
 Use this service to retrieve the available promotional offer codes where the promotional code is applicable for.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-promotionalCodeGroup.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-promotionalCodeGroup.xml)
 
 + Request
 
@@ -552,7 +552,7 @@ Use this service to retrieve the available promotional offer codes where the pro
 
           + Headers
               traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
   + Body
   + Attributes (PromotionalCodeApplicableGroupType)
@@ -578,7 +578,7 @@ Use this service to retrieve the available promotional offer codes where the pro
 
 Use this service to apply a discount to one or more seats. Take into account a discount would need a minimum number of seats to be appliable.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addDiscount.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-addDiscount.xml)
 
 + Request
 
@@ -599,7 +599,7 @@ Use this service to apply a discount to one or more seats. Take into account a d
 
         + Headers
             traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-            OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+            OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
   + Body
   + Attributes (ShoppingCartType)
@@ -625,7 +625,7 @@ Use this service to apply a discount to one or more seats. Take into account a d
 
 Use this service to apply a promotion to one or more seats. Take into account that a promotion would need a minimum number of seats to be appliable.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-addPromotion.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-addPromotion.xml)
 
 + Request
 
@@ -646,7 +646,7 @@ Use this service to apply a promotion to one or more seats. Take into account th
 
           + Headers
               traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+              OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
   + Body
   + Attributes (ShoppingCartType)
@@ -672,7 +672,7 @@ Use this service to apply a promotion to one or more seats. Take into account th
 
 Use this service to release an already applied discount from the given seats.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-releaseDiscount.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-releaseDiscount.xml)
 
 + Request
 
@@ -692,7 +692,7 @@ Use this service to release an already applied discount from the given seats.
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (ShoppingCartType)
@@ -718,7 +718,7 @@ Use this service to release an already applied discount from the given seats.
 
 Use this service to release an already applied promotion from the given seats.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-releasePromotion.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-releasePromotion.xml)
 
 + Request
 
@@ -738,7 +738,7 @@ Use this service to release an already applied promotion from the given seats.
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (ShoppingCartType)
@@ -763,7 +763,7 @@ Use this service to release an already applied promotion from the given seats.
 
 Use this service to add Client Data to a shopping cart.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-clientData.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-clientData.xml)
 
 + Request
 
@@ -799,7 +799,7 @@ Use this service to add Client Data to a shopping cart.
   + Headers
 
             traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-            OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+            OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (ShoppingCartType)
@@ -825,7 +825,7 @@ Use this service to add Client Data to a shopping cart.
 
 Use this service to add sets of delivery method and the costs per item and costs per order.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-delivery.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-delivery.xml)
 
 + Request
 
@@ -852,7 +852,7 @@ Use this service to add sets of delivery method and the costs per item and costs
   + Headers
 
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (ShoppingCartType)
@@ -878,7 +878,7 @@ Use this service to add sets of delivery method and the costs per item and costs
 
 Use this service to release the seats from the shopping cart and makes it available for anyone.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/shoppingCart-releaseItems.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/shoppingCart-releaseItems.xml)
 
 + Request
 
@@ -896,7 +896,7 @@ Use this service to release the seats from the shopping cart and makes it availa
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (ShoppingCartType)
@@ -924,7 +924,7 @@ This group contains all the related services and resources to be able to create 
 
 Use this service to create a new order from a given shopping cart token id. This will increase the seats lock time up to 45 minutes.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/order-createOrder.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/order-createOrder.xml)
 
 + Request
 
@@ -948,7 +948,7 @@ Use this service to create a new order from a given shopping cart token id. This
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (CreateOrderType)
@@ -974,7 +974,7 @@ Use this service to create a new order from a given shopping cart token id. This
 
 Use this service to definetly commit an order, notice that the availability can't be released through the API afterwards.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/order-commitOrder.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/order-commitOrder.xml)
 
 + Request
 
@@ -995,7 +995,7 @@ Use this service to definetly commit an order, notice that the availability can'
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (CommitOrderType)
@@ -1020,7 +1020,7 @@ Use this service to definetly commit an order, notice that the availability can'
 
 Use this service to obtains the order details and ticket data.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/order-details.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/order-details.xml)
 
 + Request
 
@@ -1038,7 +1038,7 @@ Use this service to obtains the order details and ticket data.
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (OrderTicketsPDFType)
@@ -1067,7 +1067,7 @@ This group contains all the related services and resources to generate tickets o
 Use this service to retrive the tickets of a given order, bear in mind the order must be already confirmed. The tickets generation are processed asynchronously, in the meantime the tickets are not available, an http error code (1088) will be returned, hence you will have to retry it until get an http 200 status code.
 **Notice** that we strongly reccommend you to set a delay time of 1 second at least between each call and never keep sending requests after 30 seconds of polling, thank you.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/order-ticketsPDF.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/order-ticketsPDF.xml)
 
 + Request
 
@@ -1087,7 +1087,7 @@ Use this service to retrive the tickets of a given order, bear in mind the order
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (OrderTicketsPDFType)
@@ -1113,7 +1113,7 @@ Use this service to retrive the tickets of a given order, bear in mind the order
 
 Use this service to retrive the most relevant information you would need in order to let you creat your own tickets Pdf.
 
-[XML sample response](http://developer.oneboxtickets.com/api-support/order-ticketsInfo.xml)
+[XML sample response](http://developer.oneboxtm.com/api-support/order-ticketsInfo.xml)
 
 + Request
 
@@ -1133,7 +1133,7 @@ Use this service to retrive the most relevant information you would need in orde
 
             + Headers
                 traceID: `String: Unique id to identify the transaction within the Onebox API audit system`
-                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtickets.com/httpresponsecodes.html)`
+                OB_Error_Code: `Number: This is the Onebox error codes. Get the full list here: [go to Onebox error  responses](http://developer.oneboxtm.com/httpresponsecodes.html)`
 
     + Body
     + Attributes (OrderTicketsPDFType)
@@ -1154,7 +1154,7 @@ Use this service to retrive the most relevant information you would need in orde
 # Data Structures
 
 ## Error500ResponseType
-+ statusCode: 1010 (number, required) - This is the Onebox error codes. Get the full list here: [go to Onebox error responses](http://developer.oneboxtickets.com/httpresponsecodes.html)
++ statusCode: 1010 (number, required) - This is the Onebox error codes. Get the full list here: [go to Onebox error responses](http://developer.oneboxtm.com/httpresponsecodes.html)
 + responseTime: `08-03-2017 13:46:03.657` (string, required)
 
 ## Error400ResponseType
